@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>JDIH Senat Mahasiswa Universitas Amikom Purwokerto</title>
+  <meta name="description" content="Portal Jaringan Dokumentasi & Informasi Hukum resmi Senat Mahasiswa Universitas Amikom Purwokerto">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* RESET & BASE */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #080915;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      padding-bottom: 4rem;
+    }
+
+    /* LIQUID GLASS FLUID ANIMATED GRADIENT BACKGROUND */
+    .liquid-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #090a18, #180e29, #0d1b2a, #161032, #0b192c);
+      background-size: 400% 400%;
+      animation: liquidFlow 22s ease infinite;
+    }
+
+    @keyframes liquidFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* FLOATING AMBIENT GLOW ORBS */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      top: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.4), rgba(79, 70, 229, 0.25));
+      animation: orbFloat1 18s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      top: 35%;
+      right: -80px;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.35), rgba(6, 182, 212, 0.25));
+      animation: orbFloat2 24s ease-in-out infinite;
+    }
+
+    .orb-3 {
+      bottom: 50px;
+      left: 10%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.3), rgba(236, 72, 153, 0.2));
+      animation: orbFloat1 20s ease-in-out infinite reverse;
+    }
+
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, -50px) scale(1.15); }
+    }
+
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-50px, 60px) scale(0.9); }
+    }
+
+    /* GLASSMORPHISM CLASSES */
+    .glass-surface {
+      background: rgba(18, 20, 36, 0.65);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+      border-radius: 1rem;
+    }
+
+    .glass-surface-interactive {
+      background: rgba(18, 20, 36, 0.6);
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .glass-surface-interactive:hover {
+      background: rgba(26, 29, 52, 0.8);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .glass-subcard {
+      background: rgba(12, 14, 28, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .glass-subcard:hover {
+      background: rgba(22, 25, 48, 0.9);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+    }
+
+    .glass-btn-drive {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(168, 85, 247, 0.22));
+      border: 1px solid rgba(244, 114, 182, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 0.5rem;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.12);
+    }
+
+    .glass-btn-drive:hover {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(168, 85, 247, 0.35));
+      border-color: rgba(244, 114, 182, 0.5);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.25);
+    }
+
+    /* CONTAINER & LAYOUT (MOBILE FIRST) */
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 2rem 1rem 1rem;
+    }
+
+    /* LOGO AVATAR */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .logo-wrapper {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      padding: 8px;
+      background: rgba(18, 20, 36, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.3), 0 8px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      background-image: url('/assets/aistudio/Logo_Sema_HD_ef634b2e.png');
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    /* DETAILS & SUMMARY ACCORDION STYLING */
+    details {
+      margin-bottom: 0.85rem;
+      transition: border-color 0.25s ease;
+    }
+
+    details summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details summary .chevron {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: #94a3b8;
+      stroke-width: 2;
+    }
+
+    details[open] summary .chevron {
+      transform: rotate(180deg);
+      stroke: #c084fc;
+    }
+
+    details[open] {
+      border-color: rgba(168, 85, 247, 0.35);
+    }
+
+    .accordion-content {
+      padding: 0.25rem 0.75rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    /* SEARCH BAR */
+    .search-wrapper {
+      position: sticky;
+      top: 0.5rem;
+      z-index: 25;
+      margin-bottom: 1.25rem;
+      padding: 0.65rem;
+    }
+
+    .search-input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input-box input {
+      width: 100%;
+      padding: 0.65rem 2.25rem 0.65rem 2.5rem;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.75rem;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input-box input:focus {
+      border-color: rgba(168, 85, 247, 0.6);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      width: 16px;
+      height: 16px;
+      stroke: #94a3b8;
+      pointer-events: none;
+    }
+
+    .pills-container {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      margin-top: 0.5rem;
+      padding-bottom: 0.2rem;
+      scrollbar-width: none;
+    }
+
+    .pills-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-pill {
+      white-space: nowrap;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.7rem;
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-pill.active {
+      background: rgba(168, 85, 247, 0.3);
+      color: #fff;
+      border-color: rgba(168, 85, 247, 0.5);
+      font-weight: 600;
+    }
+
+    /* TYPOGRAPHY HELPERS */
+    .title-main {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-align: center;
+      margin-top: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle-1 {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      text-align: center;
+      margin-top: 0.25rem;
+    }
+
+    .subtitle-2 {
+      font-size: 0.75rem;
+      color: #c084fc;
+      text-align: center;
+      margin-top: 0.1rem;
+    }
+
+    .badge-handle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 auto;
+    }
+
+    /* CONTACT HOTLINE CARDS */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 480px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-card {
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .contact-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLUID LIQUID BACKGROUND -->
+  <div class="liquid-background">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <div class="logo-container">
+        <div class="logo-wrapper">
+          <div class="logo-img" role="img" aria-label="Logo SEMA Amikom Purwokerto"></div>
+        </div>
+      </div>
+
+      <div class="glass-pill badge-handle">
+        <span style="color: #c084fc;">@</span>sema.amikompwt
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #34d399; display: inline-block;"></span>
+      </div>
+
+      <h1 class="title-main" style="margin-top: 0.8rem;">Jaringan Dokumentasi & Informasi Hukum (JDIH)</h1>
+      <p class="subtitle-1">Official Portal of Senat Mahasiswa Universitas Amikom Purwokerto</p>
+    </header>
+
+    <!-- NEW SECTION: HOTLINE RESMI WHATSAPP & EMAIL SEMA -->
+    <section style="margin-top: 1.5rem;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; padding: 0 0.2rem;">
+        <span style="font-size: 0.72rem; font-weight: 700; color: #e2e8f0; text-transform: uppercase; letter-spacing: 0.05em;">
+          📞 Kontak WhatsApp &amp; Email SEMA
+        </span>
+        <span style="font-size: 0.65rem; color: #34d399; font-weight: 600;">● Aktif</span>
+      </div>
+
+      <div class="contact-grid">
+        <!-- 1. WhatsApp SEMA -->
+        <a href="https://wa.me/628212649382" target="_blank" rel="noopener noreferrer" class="glass-surface-interactive contact-card" style="border-color: rgba(52, 211, 153, 0.3);">
+          <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
+            <div class="contact-icon" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3);">
+              WA
+            </div>
+            <div style="min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">SEMA Amikom</div>
+              <div style="font-size: 0.68rem; color: #34d399; font-family: monospace;">wa.me/628212649382</div>
+            </div>
+          </div>
+          <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
+        </a>
+
+        <!-- 2. WhatsApp KETUA UMUM -->
+        <a href="https://wa.me/62895421169504" target="_blank" rel="noopener noreferrer" class="glass-surface-interactive contact-card" style="border-color: rgba(168, 85, 247, 0.3);">
+          <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
+            <div class="contact-icon" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);">
+              KU
+            </div>
+            <div style="min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Ketua Umum SEMA</div>
+              <div style="font-size: 0.68rem; color: #c084fc; font-family: monospace;">wa.me/62895421169504</div>
+            </div>
+          </div>
+          <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
+        </a>
+
+        <!-- 3. WhatsApp Narahubung (Lifa) -->
+        <a href="https://wa.me/6288228951004" target="_blank" rel="noopener noreferrer" class="glass-surface-interactive contact-card" style="border-color: rgba(6, 182, 212, 0.3);">
+          <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
+            <div class="contact-icon" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; border: 1px solid rgba(6, 182, 212, 0.3);">
+              NL
+            </div>
+            <div style="min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Narahubung (Lifa)</div>
+              <div style="font-size: 0.68rem; color: #67e8f9; font-family: monospace;">wa.me/6288228951004</div>
+            </div>
+          </div>
+          <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
+        </a>
+
+        <!-- 4. Gmail SEMA -->
+        <a href="mailto:semamikompwt@gmail.com" class="glass-surface-interactive contact-card" style="border-color: rgba(244, 63, 94, 0.3);">
+          <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
+            <div class="contact-icon" style="background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3);">
+              ✉️
+            </div>
+            <div style="min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Gmail SEMA</div>
+              <div style="font-size: 0.68rem; color: #fb7185; font-family: monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">semamikompwt@gmail.com</div>
+            </div>
+          </div>
+          <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SEARCH & REAL-TIME FILTER -->
+    <section class="glass-surface search-wrapper" style="margin-top: 1.25rem;">
+      <div class="search-input-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Cari produk hukum, SK, atau regulasi..." oninput="handleSearch()">
+      </div>
+
+      <div class="pills-container">
+        <button class="filter-pill active" onclick="setCategoryFilter('all', this)">Semua</button>
+        <button class="filter-pill" onclick="setCategoryFilter('uud', this)">UUD</button>
+        <button class="filter-pill" onclick="setCategoryFilter('uu-turunan', this)">UU Turunan</button>
+        <button class="filter-pill" onclick="setCategoryFilter('regulasi-turunan', this)">Regulasi</button>
+        <button class="filter-pill" onclick="setCategoryFilter('tap-muswa', this)">TAP-MUSWA</button>
+        <button class="filter-pill" onclick="setCategoryFilter('internal-sema', this)">Internal SEMA</button>
+        <button class="filter-pill" onclick="setCategoryFilter('tap-sema', this)">TAP SEMA</button>
+        <button class="filter-pill" onclick="setCategoryFilter('sk-sema', this)">Keputusan (SK)</button>
+        <button class="filter-pill" onclick="setCategoryFilter('sk-ketua-umum-sema', this)">SK Ketum</button>
+      </div>
+    </section>
+
+    <!-- ACCORDION SECTIONS (<details> & <summary>) -->
+    <main id="documentList">
+      <!-- 1. UNDANG-UNDANG DASAR -->
+      <details class="glass-surface category-group" data-category="uud" open>
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">📖</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">UNDANG-UNDANG DASAR</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Konstitusi Tertinggi Lembaga Kemahasiswaan</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">1 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="uud lk lembaga kemahasiswaan konstitusi amikom 2026">
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Dasar Lembaga Kemahasiswaan Tahun 2026</div>
+              <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8;">Diperbarui: Musyawarah Mahasiswa 2026</div>
+              <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.2rem;">
+                <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+                <a href="https://drive.google.com/file/d/1g-_3zYwPwlVO9Vj4ouMeSs_tGuVRw_7X/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
+                  <span>▲ Buka di Google Drive</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 2. UNDANG-UNDANG TURUNAN -->
+      <details class="glass-surface category-group" data-category="uu-turunan" open>
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">⚖️</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">UNDANG-UNDANG TURUNAN</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Produk Legislasi Lembaga Kemahasiswaan</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">3 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="Undang-Undang Lembaga Kemahasiswaan Nomor I Tahun 2021 Tentang Musyawarah Mahasiswa">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Lembaga Kemahasiswaan Nomor I Tahun 2021 Tentang Musyawarah Mahasiswa</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman tata kerja Musyawarah Mahasiswa Universitas Amikom Purwokerto.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1RDD2j2AblYdQ4ptybvqnf_Dc4__ELUaN/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
+                <span>▲ Buka di Google Drive</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="Undang-Undang Lembaga Kemahasiswaan Nomor II Tahun 2026 tentang Keorganisasian">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Lembaga Kemahasiswaan Nomor II Tahun 2026 tentang Keorganisasian</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketentuan mengenai penyelenggaraan kehidupan organisasi kemahasiswaan dan tata kelola lembaga kemahasiswaan sesuai ruang lingkup regulasi.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1QyGhPezJjD6V4WZpdaDfcglH7ibPNXrS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
+                <span>▲ Buka di Google Drive</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="Undang-Undang Lembaga Kemahasiswaan Nomor III Tahun 2026 tentang Pemilihan Umum Mahasiswa Raya">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Lembaga Kemahasiswaan Nomor III Tahun 2026 tentang Pemilihan Umum Mahasiswa Raya</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Landasan penyelenggaraan Pemira, termasuk pembentukan dan pelaksanaan tugas Panitia Pemira serta pengawasan pemilihan mahasiswa.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1zYd5nup1qF4ajG2_cZokd4o4pXnBOpy1/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
+                <span>▲ Buka di Google Drive</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. REGULASI TURUNAN -->
+      <details class="glass-surface category-group" data-category="regulasi-turunan">
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">📑</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">REGULASI TURUNAN</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Tata Tertib, Kode Etik &amp; Petunjuk Teknis</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">4 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tata tertib musyawarah mahasiswa muswa tata cara persidangan pimpinan sidang peserta forum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Tata Tertib Musyawarah Mahasiswa</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketentuan pelaksanaan musyawarah, tata cara persidangan, hak peserta, dan mekanisme pengambilan keputusan forum.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1cBUNub9Auepse-GREdnHN0kVW_LPkQJc/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="peraturan sema kode etik senator anggota lembaga kemahasiswaan integritas disiplin sanksi">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Kode Etik Lembaga Kemahasiswaan 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman etika, integritas, tanggung jawab, dan kedisiplinan bagi anggota lembaga kemahasiswaan.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1J14zJCnJO99OaIE1HA3APqZazskhVzQt/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="juklak anggaran 2026 petunjuk pelaksanaan anggaran ormawa proposal rencana anggaran biaya rab verifikasi komisi anggaran">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Juklak Anggaran 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman pelaksanaan anggaran dan acuan verifikasi pengajuan anggaran kegiatan organisasi kemahasiswaan.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1-I53xL6ZkpbjGZlglBuDewHdEALwuu3i/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="juklak juknis standarisasi ukm 2026 standarisasi organisasi kemahasiswaan penilaian evaluasi proposal program kerja lpj indikator kinerja">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Juklak dan Juknis Standarisasi UKM 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman standardisasi dan instrumen penilaian UKM sebagai acuan evaluasi tata kelola, program kerja, dan pertanggungjawaban organisasi.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1Pi9v-L4DoZRybp2m4mdda8xpSC91FlIY/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 4. KETETAPAN MUSYAWARAH MAHASISWA -->
+      <details class="glass-surface category-group" data-category="tap-muswa">
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">🏛️</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KETETAPAN MUSYAWARAH MAHASISWA (TAP-MUSWA)</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Keputusan Tertinggi Forum Muswa Amikom</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">5 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="ketetapan muswa ii 2026 pengesahan uu lk ii keorganisasian lembaga kemahasiswaan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Ketetapan Muswa II tentang Pengesahan UU LK II Tahun 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Penetapan dan pengesahan UU LK II Tahun 2026 sebagai bagian dari landasan regulasi lembaga kemahasiswaan.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/177SfjlmvdfrGxaYCnfAfofEt91IiMol1/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="ketetapan muswa ii 2026 pengesahan uud lk undang undang dasar lembaga kemahasiswaan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Ketetapan Muswa II tentang Pengesahan UUD LK Tahun 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Penetapan dan pengesahan Undang-Undang Dasar Lembaga Kemahasiswaan sebagai landasan konstitusional organisasi kemahasiswaan.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1b5cWmuT45B7x-ooOMjgCwHJ3j_vcc11L/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tap muswasus 2026 pemberhentian wakil presiden bem kabinet niskala juang ketetapan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">TAP Muswasus tentang Pemberhentian Wakil Presiden BEM Tahun 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan Musyawarah Mahasiswa Luar Biasa mengenai pemberhentian Wakil Presiden BEM Tahun 2026.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1avYmgKAtyO5NmJJo--mmgzJ1GlkAbDUY/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tap muswasus 2026 penetapan panitia pemira panwas pemilihan umum mahasiswa raya pengawasan pemilihan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">TAP Muswasus tentang Penetapan Panitia Pemira dan Panwas Pemira Tahun 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan mengenai penetapan Panitia Pemilihan Umum Mahasiswa Raya (Pemira) dan perangkat pengawasan Pemira Tahun 2026.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1t3jJeiL6Y7FfrkINEMQ7zIpKOlvXOUfs/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tap muswasus 2026 pengesahan undang undang lembaga kemahasiswaan uu lk nomor iii pemira">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">TAP Muswasus tentang Pengesahan UU LK Nomor III Tahun 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan pengesahan Undang-Undang Lembaga Kemahasiswaan Nomor III Tahun 2026 sebagai landasan regulasi Pemira.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1BOGV6D66Q4pV58rHFFKWxOdYoB-GDQz5/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 5. SENAT MAHASISWA (INTERNAL SEMA) -->
+      <details class="glass-surface category-group" data-category="internal-sema">
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">👥</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">SENAT MAHASISWA</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Konstitusi Internal &amp; Alokasi Parlemen</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">2 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="ad art sema 2026 anggaran dasar anggaran rumah tangga senat mahasiswa struktur organisasi tugas wewenang keanggotaan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Anggaran Dasar dan Anggaran Rumah Tangga (AD/ART) SEMA 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Landasan organisasi yang mengatur kedudukan, struktur, keanggotaan, tugas, wewenang, dan mekanisme kerja Senat Mahasiswa.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1NRgKfa1EJxoMEH1xTwJoSf17CM1TYCfH/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="alokasi anggaran 2026 anggaran ormawa sema bem ukm hmps distribusi dana keuangan kegiatan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Dokumen Alokasi Anggaran Tahun 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Dokumen alokasi anggaran organisasi kemahasiswaan sebagai acuan distribusi dan perencanaan pendanaan kegiatan tahun 2026.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1MKNHj9Dts5WTQ1H0izGfQP2xkA89KV0a/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 6. KETETAPAN SEMA (TAP-SEMA) -->
+      <details class="glass-surface category-group" data-category="tap-sema">
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">📜</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KETETAPAN SEMA (TAP-SEMA)</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Ketetapan Resmi Senat Mahasiswa</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">1 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="013 ketetapan sema penonaktifan ukm racana universitas amikom purwokerto organisasi kemahasiswaan evaluasi status kelembagaan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">013. Ketetapan SEMA tentang Penonaktifan UKM Racana Universitas Amikom Purwokerto</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan Senat Mahasiswa mengenai penonaktifan Unit Kegiatan Mahasiswa Racana Universitas Amikom Purwokerto.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1DUUouVACL4LXGyOXusSa4QNHCB3iJRJP/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 7. KEPUTUSAN SEMA (SURAT KEPUTUSAN / SK SEMA) -->
+      <details class="glass-surface category-group" data-category="sk-sema" open>
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">🛡️</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KEPUTUSAN SEMA (SURAT KEPUTUSAN / SK)</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Penetapan Resmi Senat Mahasiswa</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">3 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="012 sk sema penurunan badan semi otonom bso status kelembagaan organisasi kemahasiswaan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">012. SK-SEMA tentang Penurunan Status Badan Semi Otonom (BSO)</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Keputusan Senat Mahasiswa mengenai penurunan status kelembagaan Badan Semi Otonom.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1nU4m-sTpS85a0csDtpdq9l_d0TMEBA_T/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="016 sk sema pengangkatan badan otonom hmps himpunan mahasiswa program studi kelembagaan kepengurusan">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">016. SK-SEMA tentang Pengangkatan Badan Otonom HMPS</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Keputusan Senat Mahasiswa mengenai pengangkatan Badan Otonom Himpunan Mahasiswa Program Studi (HMPS).</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1CNytKiw0Tnd8T6PBKTGQ9Zw0Csji9h52/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="112 sk sema pengangkatan anggota legislatif muda 2026 lm komisi sema kaderisasi legislasi">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">112. SK-SEMA tentang Pengangkatan Anggota Legislatif Muda 2026</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Keputusan pengangkatan anggota Legislatif Muda sebagai bagian dari pengembangan kader dan penguatan fungsi legislasi SEMA.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1hna2-AH9ztgoQY5pcbqGIuQOydbj9bn5/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 8. KEPUTUSAN KETUA UMUM SEMA (SK KETUM) -->
+      <details class="glass-surface category-group" data-category="sk-ketua-umum-sema" open>
+        <summary>
+          <div style="display: flex; align-items: center; gap: 0.65rem;">
+            <span style="font-size: 1.1rem;">🖋️</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KEPUTUSAN KETUA UMUM SEMA</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Keputusan Resmi Ketua Umum Senat Mahasiswa</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.65rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.5rem; border-radius: 999px; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">11 Dokumen</span>
+            <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </summary>
+        <div class="accordion-content">
+          <!-- Item 1 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="092 sk pengangkatan anggota sema sekretaris jenderal ii ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">092. SK Pengangkatan Anggota SEMA (Sekretaris Jenderal II)</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan anggota pada jabatan Sekretaris Jenderal II.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1lvotEnQnOoD0aXwuTm7yqP2wHcbAYpUO/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="094 sk pengangkatan anggota sema staff komisi c ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">094. SK Pengangkatan Anggota SEMA (Staf Komisi C)</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan anggota sebagai staf Komisi C.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/18AyxchTOn_vegB_-6d45rSceQDY89dQL/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="159 sk paw staf komisi a pergantian antarwaktu ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">159. SK PAW Staf Komisi A</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan mengenai Pergantian Antarwaktu (PAW) staf Komisi A SEMA.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/10lPH8IyXl3bTXzv7bLy1VPMqaitAbT8L/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="190 sk pemberhentian ketua komisi a ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">190. SK Pemberhentian Ketua Komisi A</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pemberhentian Ketua Komisi A.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1GzEIZhTaVhw0IdOiO-yVfX6HEroHimr2/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="258 sk pemberhentian ketua komisi b ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">258. SK Pemberhentian Ketua Komisi B</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pemberhentian Ketua Komisi B.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1wDlV6Ic2gsIllN0EeSrTmsfvUZ9dOTV7/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="259 sk pemberhentian ketua komisi c ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">259. SK Pemberhentian Ketua Komisi C</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pemberhentian Ketua Komisi C.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/10AGnyoKN6ZoE249RSk6W0zovFrvlTKdG/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="265 sk pengangkatan ketua komisi a ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">265. SK Pengangkatan Ketua Komisi A</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan Ketua Komisi A.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1XQPy6IgFuCKs85fn1zlEWpW_X2pRWKja/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="264 sk pengangkatan ketua komisi b ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">264. SK Pengangkatan Ketua Komisi B</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan Ketua Komisi B.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1_lKE4hpAWLCI8tGEe2q7v5vPaX12fpcU/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 9 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="266 sk pengangkatan ketua komisi c ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">266. SK Pengangkatan Ketua Komisi C</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan Ketua Komisi C.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1rX0kmwFPnhdIWpIX58tFsEo-ukh_RmMA/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 10 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="336 sk pembebasan tugas sementara ketua komisi b plt ketua komisi b ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">336. SK Pembebasan Tugas Sementara Ketua Komisi B dan Penunjukan Plt Ketua Komisi B</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan tentang pembebasan tugas sementara Ketua Komisi B dan penunjukan Pelaksana Tugas (Plt) Ketua Komisi B.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1IqxuzmDMjncSx6dqu_g1ViyBqQ9v-Sz5/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+
+          <!-- Item 11 -->
+          <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="337 sk pengangkatan anggota sema staf komisi b ketum">
+            <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">337. SK Pengangkatan Anggota SEMA (Staf Komisi B)</div>
+            <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan anggota sebagai staf Komisi B.</div>
+            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+              <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
+              <a href="https://drive.google.com/file/d/1lEL5vWiXjxNen6cArF--GkLh3bEjwizd/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
+            </div>
+          </div>
+        </div>
+      </details>
+    </main>
+
+    <!-- NOTICE / DISCLAIMER -->
+    <section style="margin-top: 1.5rem;">
+      <div class="glass-surface" style="padding: 0.9rem; border-color: rgba(244, 63, 94, 0.2); background: rgba(88, 28, 135, 0.15); display: flex; align-items: flex-start; gap: 0.75rem;">
+        <span style="font-size: 1.25rem;">🛡️</span>
+        <p style="font-size: 0.72rem; color: #e2e8f0; line-height: 1.5;">
+          Semua dokumen tersimpan di <strong>Google Drive Resmi SEMA Amikom Purwokerto</strong> dengan hak akses <em>Read-Only</em> untuk seluruh civitas akademika.
+        </p>
+      </div>
+    </section>
+
+    <footer style="margin-top: 2.5rem; text-align: center; font-size: 0.68rem; color: #94a3b8; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem;">
+      <p style="color: #cbd5e1; font-weight: 600;">&copy; 2026 Senat Mahasiswa Universitas Amikom Purwokerto. All Rights Reserved.</p>
+      <p style="font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-top: 0.25rem;">SENAT MAHASISWA UNIVERSITAS AMIKOM PURWOKERTO</p>
+    </footer>
+  </div>
+
+  <!-- REAL-TIME JAVASCRIPT SEARCH & FILTERING LOGIC -->
+  <script>
+    let activeFilter = 'all';
+
+    function setCategoryFilter(category, buttonEl) {
+      activeFilter = category;
+      document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+      if (buttonEl) buttonEl.classList.add('active');
+      handleSearch();
+    }
+
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const groups = document.querySelectorAll('.category-group');
+
+      groups.forEach(group => {
+        const cat = group.getAttribute('data-category');
+        const matchesCategory = (activeFilter === 'all' || activeFilter === cat);
+
+        if (!matchesCategory) {
+          group.style.display = 'none';
+          return;
+        }
+
+        const items = group.querySelectorAll('.doc-item');
+        let groupHasMatch = false;
+
+        items.forEach(item => {
+          const keywords = (item.getAttribute('data-keywords') || '').toLowerCase();
+          const title = item.querySelector('.doc-title')?.innerText.toLowerCase() || '';
+          const desc = item.querySelector('.doc-desc')?.innerText.toLowerCase() || '';
+
+          const isMatch = !query || keywords.includes(query) || title.includes(query) || desc.includes(query);
+
+          if (isMatch) {
+            item.style.display = 'block';
+            groupHasMatch = true;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        if (groupHasMatch) {
+          group.style.display = 'block';
+          if (query) {
+            group.setAttribute('open', '');
+          }
+        } else {
+          group.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

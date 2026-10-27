@@ -1,0 +1,8 @@
+{
+  "name": "JDIH SEMA Amikom Purwokerto - Liquid Glass Linktree",
+  "description": "Portal Jaringan Dokumentasi & Informasi Hukum resmi Senat Mahasiswa Universitas Amikom Purwokerto dengan tema Liquid Glassmorphism, akordion interaktif, dan pencarian dokumen real-time.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
