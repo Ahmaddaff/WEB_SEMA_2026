@@ -8,12 +8,6 @@ import {
   Search,
   X,
   ExternalLink,
-  BookOpen,
-  Sliders,
-  Award,
-  Users,
-  CheckSquare,
-  ShieldAlert,
   ShieldCheck,
   ChevronDown,
   FileCheck2,
@@ -21,13 +15,38 @@ import {
   Check,
   Download,
   FileSpreadsheet,
-  FileSignature,
-  Mail,
-  PhoneCall,
-  UserCheck
+  PhoneCall
 } from 'lucide-react';
 import { DOCUMENT_CATEGORIES, LegalDocument } from './data/documentsData';
 import { filterDocuments, normalizeText } from './utils/documentSearch';
+
+/**
+ * Logo brand resmi. Aset sudah diproses dari sumber aslinya:
+ * background putih dibuang, di-crop ke konten, disimpan di /public/assets/brand.
+ */
+const BRAND_ASSETS = {
+  whatsapp: '/assets/brand/whatsapp.png',
+  gmail: '/assets/brand/gmail.png',
+  instagram: '/assets/brand/instagram.png',
+  lembagaKemahasiswaan: '/assets/brand/lembaga-kemahasiswaan.png',
+  semaHd: '/assets/brand/sema-hd.png',
+} as const;
+
+/**
+ * Logo resmi per kategori dokumen:
+ * - 4 kategori produk Lembaga Kemahasiswaan -> Logo Lembaga Kemahasiswaan
+ * - 4 kategori produk/internal SEMA           -> Logo SEMA HD
+ */
+const CATEGORY_LOGOS: Record<string, string> = {
+  uud: BRAND_ASSETS.lembagaKemahasiswaan,
+  'uu-turunan': BRAND_ASSETS.lembagaKemahasiswaan,
+  'regulasi-turunan': BRAND_ASSETS.lembagaKemahasiswaan,
+  'tap-muswa': BRAND_ASSETS.lembagaKemahasiswaan,
+  'internal-sema': BRAND_ASSETS.semaHd,
+  'tap-sema': BRAND_ASSETS.semaHd,
+  'sk-sema': BRAND_ASSETS.semaHd,
+  'sk-ketua-umum-sema': BRAND_ASSETS.semaHd,
+};
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -70,27 +89,7 @@ export default function App() {
     setTimeout(() => setCopiedContactToast(null), 2500);
   };
 
-  const getCategoryIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'book':
-        return <BookOpen className="w-5 h-5 text-rose-400" />;
-      case 'file-text':
-        return <FileSpreadsheet className="w-5 h-5 text-purple-400" />;
-      case 'sliders':
-        return <Sliders className="w-5 h-5 text-cyan-400" />;
-      case 'award':
-        return <Award className="w-5 h-5 text-amber-400" />;
-      case 'users':
-        return <Users className="w-5 h-5 text-blue-400" />;
-      case 'check-square':
-        return <CheckSquare className="w-5 h-5 text-violet-400" />;
-      case 'stamp':
-        return <FileSignature className="w-5 h-5 text-emerald-400" />;
-      case 'shield':
-      default:
-        return <ShieldAlert className="w-5 h-5 text-pink-400" />;
-    }
-  };
+  const getCategoryLogo = (categoryId: string) => CATEGORY_LOGOS[categoryId] ?? BRAND_ASSETS.semaHd;
 
   // Highlighting matched text in title
   const renderHighlightedText = (text: string, query: string) => {
@@ -168,18 +167,18 @@ export default function App() {
         </header>
 
         {/* QUICK CONTACTS & WHATSAPP / GMAIL SECTION */}
-        <section className="mt-6 space-y-2.5" aria-label="Kontak Cepat WhatsApp dan Email SEMA">
+        <section className="mt-6 space-y-3" aria-label="Kontak Cepat WhatsApp dan Akun Resmi SEMA">
           <div className="flex items-center justify-between px-1">
             <span className="text-[11px] uppercase tracking-wider font-bold text-slate-300 flex items-center gap-1.5">
               <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
-              Kontak WhatsApp &amp; Email Resmi SEMA
+              Kontak WhatsApp &amp; Akun Resmi SEMA
             </span>
             <span className="text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
               Online
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {/* 1. WhatsApp SEMA */}
             <a
               href="https://wa.me/628212649382"
@@ -188,14 +187,19 @@ export default function App() {
               className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-emerald-500/25 group transition-all"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold text-sm border border-emerald-500/30 flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <span className="text-xs">WA</span>
-                </div>
+                <span className="brand-icon">
+                  <img
+                    src={BRAND_ASSETS.whatsapp}
+                    alt="WhatsApp"
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </span>
                 <div className="min-w-0">
                   <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
                     SEMA Amikom
                   </div>
-                  <div className="text-[10px] text-emerald-400 font-mono">
+                  <div className="text-[10px] text-emerald-400 font-mono truncate">
                     wa.me/628212649382
                   </div>
                 </div>
@@ -203,30 +207,7 @@ export default function App() {
               <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors flex-shrink-0 ml-1" />
             </a>
 
-            {/* 2. WhatsApp KETUA UMUM */}
-            <a
-              href="https://wa.me/62895421169504"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-purple-500/25 group transition-all"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold text-sm border border-purple-500/30 flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <UserCheck className="w-4 h-4" />
-                </div>
-                <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
-                    Ketua Umum SEMA
-                  </div>
-                  <div className="text-[10px] text-purple-300 font-mono">
-                    wa.me/62895421169504
-                  </div>
-                </div>
-              </div>
-              <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors flex-shrink-0 ml-1" />
-            </a>
-
-            {/* 3. WhatsApp Narahubung (Lifa) */}
+            {/* 2. WhatsApp Narahubung (Lifa) */}
             <a
               href="https://wa.me/6288228951004"
               target="_blank"
@@ -234,14 +215,19 @@ export default function App() {
               className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-cyan-500/25 group transition-all"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-sm border border-cyan-500/30 flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <span className="text-xs">NL</span>
-                </div>
+                <span className="brand-icon">
+                  <img
+                    src={BRAND_ASSETS.whatsapp}
+                    alt="WhatsApp"
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </span>
                 <div className="min-w-0">
                   <div className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
                     Narahubung (Lifa)
                   </div>
-                  <div className="text-[10px] text-cyan-300 font-mono">
+                  <div className="text-[10px] text-cyan-300 font-mono truncate">
                     wa.me/6288228951004
                   </div>
                 </div>
@@ -249,21 +235,54 @@ export default function App() {
               <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors flex-shrink-0 ml-1" />
             </a>
 
-            {/* 4. Gmail SEMA */}
+            {/* 3. Gmail SEMA */}
             <a
               href="mailto:semamikompwt@gmail.com"
               className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-rose-500/25 group transition-all"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-rose-500/20 text-rose-300 flex items-center justify-center font-bold text-sm border border-rose-500/30 flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Mail className="w-4 h-4" />
-                </div>
+                <span className="brand-icon">
+                  <img
+                    src={BRAND_ASSETS.gmail}
+                    alt="Gmail"
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </span>
                 <div className="min-w-0">
                   <div className="text-xs font-bold text-white group-hover:text-rose-300 transition-colors truncate">
                     Gmail Resmi SEMA
                   </div>
                   <div className="text-[10px] text-rose-300 font-mono truncate">
                     semamikompwt@gmail.com
+                  </div>
+                </div>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors flex-shrink-0 ml-1" />
+            </a>
+
+            {/* 4. Instagram Resmi SEMA */}
+            <a
+              href="https://www.instagram.com/sema.amikompwt?srtk=d3RzZzZvc3ZnNjNv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-fuchsia-500/25 group transition-all"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="brand-icon">
+                  <img
+                    src={BRAND_ASSETS.instagram}
+                    alt="Instagram"
+                    className="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </span>
+                <div className="min-w-0">
+                  <div className="text-xs font-bold text-white group-hover:text-fuchsia-300 transition-colors truncate">
+                    Instagram Resmi SEMA
+                  </div>
+                  <div className="text-[10px] text-fuchsia-300 font-mono truncate">
+                    @sema.amikompwt
                   </div>
                 </div>
               </div>
@@ -382,24 +401,29 @@ export default function App() {
                 className="group glass-surface rounded-2xl border border-white/12 overflow-hidden transition-all duration-300 shadow-lg"
               >
                 {/* Native Accordion Summary */}
-                <summary className="p-4 flex items-center justify-between select-none cursor-pointer hover:bg-white/[0.03] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
-                  <div className="flex items-center gap-3 min-w-0 pr-2">
-                    <div className="p-2 rounded-xl bg-white/5 border border-white/10 flex-shrink-0 group-open:bg-purple-500/15 group-open:border-purple-400/30 transition-colors">
-                      {getCategoryIcon(category.iconName)}
-                    </div>
+                <summary className="p-4 flex items-center justify-between gap-3 select-none cursor-pointer hover:bg-white/[0.03] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
+                  <div className="flex items-center gap-3 min-w-0 pr-1">
+                    <span className="category-logo">
+                      <img
+                        src={getCategoryLogo(category.id)}
+                        alt={`Logo resmi ${category.title}`}
+                        className="h-full w-full object-contain"
+                        loading="lazy"
+                      />
+                    </span>
                     <div className="min-w-0 text-left">
-                      <h3 className="text-xs sm:text-sm font-bold text-white tracking-wide truncate uppercase">
+                      <h3 className="text-xs sm:text-sm font-bold text-white tracking-wide line-clamp-2 uppercase leading-snug">
                         {category.title}
                       </h3>
-                      <p className="text-[11px] text-slate-400 truncate mt-0.5">
+                      <p className="text-[11px] text-slate-400 line-clamp-2 mt-0.5 leading-relaxed">
                         {category.subtitle}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/5 text-slate-300 border border-white/10">
-                      {category.documents.length} Dokumen
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/5 text-slate-300 border border-white/10 whitespace-nowrap">
+                      {`${category.documents.length} Dokumen`}
                     </span>
                     <div className="p-1 rounded-md text-slate-400 group-hover:text-white transition-colors">
                       <ChevronDown className="w-4 h-4 accordion-chevron" />
@@ -414,7 +438,7 @@ export default function App() {
                       key={doc.id}
                       className="p-3.5 rounded-xl glass-subcard group/item relative overflow-hidden"
                     >
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex flex-col gap-2.5">
                         {/* Title & Description */}
                         <div
                           className="flex-1 min-w-0 cursor-pointer"
@@ -449,15 +473,15 @@ export default function App() {
                         </div>
 
                         {/* Status Badge & Google Drive Action Button */}
-                        <div className="flex items-center gap-2 self-end sm:self-center flex-shrink-0">
-                          <span className="text-[10px] font-bold px-2 py-1 rounded-md bg-white/5 text-slate-300 border border-white/10 tracking-wider">
+                        <div className="flex items-center gap-2 flex-wrap flex-shrink-0">
+                          <span className="text-[10px] font-bold px-2 py-1 rounded-md bg-white/5 text-slate-300 border border-white/10 tracking-wider whitespace-nowrap">
                             {doc.status}
                           </span>
                           <a
                             href={doc.driveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="glass-btn-drive px-3 py-1.5 rounded-lg text-xs font-semibold text-white inline-flex items-center gap-1.5"
+                            className="glass-btn-drive px-3 py-1.5 rounded-lg text-xs font-semibold text-white inline-flex items-center gap-1.5 whitespace-nowrap"
                             aria-label={`Buka di Google Drive: ${doc.title}`}
                           >
                             <span className="text-rose-300 font-bold text-xs">▲</span>

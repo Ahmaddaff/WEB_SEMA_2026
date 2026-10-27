@@ -399,6 +399,66 @@
       font-size: 0.75rem;
       flex-shrink: 0;
     }
+
+    /* Brand icon - logo resmi WhatsApp / Gmail */
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.26rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      flex-shrink: 0;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .contact-card:hover .brand-icon {
+      transform: scale(1.08);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .brand-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Tile logo resmi - Lembaga Kemahasiswaan / SEMA HD */
+    .category-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.18rem;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.75);
+      flex-shrink: 0;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .category-group:hover .category-logo,
+    .category-group[open] .category-logo {
+      transform: scale(1.04);
+      border-color: rgba(196, 181, 253, 0.9);
+      box-shadow: 0 10px 26px -8px rgba(0, 0, 0, 0.8), 0 0 0 3px rgba(168, 85, 247, 0.18);
+    }
+
+    .category-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -432,7 +492,7 @@
     <section style="margin-top: 1.5rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; padding: 0 0.2rem;">
         <span style="font-size: 0.72rem; font-weight: 700; color: #e2e8f0; text-transform: uppercase; letter-spacing: 0.05em;">
-          📞 Kontak WhatsApp &amp; Email SEMA
+          📞 Kontak WhatsApp &amp; Akun Resmi SEMA
         </span>
         <span style="font-size: 0.65rem; color: #34d399; font-weight: 600;">● Aktif</span>
       </div>
@@ -441,8 +501,8 @@
         <!-- 1. WhatsApp SEMA -->
         <a href="https://wa.me/628212649382" target="_blank" rel="noopener noreferrer" class="glass-surface-interactive contact-card" style="border-color: rgba(52, 211, 153, 0.3);">
           <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
-            <div class="contact-icon" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3);">
-              WA
+            <div class="brand-icon">
+              <img src="/assets/brand/whatsapp.png" alt="WhatsApp" />
             </div>
             <div style="min-width: 0;">
               <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">SEMA Amikom</div>
@@ -452,25 +512,11 @@
           <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
         </a>
 
-        <!-- 2. WhatsApp KETUA UMUM -->
-        <a href="https://wa.me/62895421169504" target="_blank" rel="noopener noreferrer" class="glass-surface-interactive contact-card" style="border-color: rgba(168, 85, 247, 0.3);">
-          <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
-            <div class="contact-icon" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);">
-              KU
-            </div>
-            <div style="min-width: 0;">
-              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Ketua Umum SEMA</div>
-              <div style="font-size: 0.68rem; color: #c084fc; font-family: monospace;">wa.me/62895421169504</div>
-            </div>
-          </div>
-          <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
-        </a>
-
-        <!-- 3. WhatsApp Narahubung (Lifa) -->
+        <!-- 2. WhatsApp Narahubung (Lifa) -->
         <a href="https://wa.me/6288228951004" target="_blank" rel="noopener noreferrer" class="glass-surface-interactive contact-card" style="border-color: rgba(6, 182, 212, 0.3);">
           <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
-            <div class="contact-icon" style="background: rgba(6, 182, 212, 0.2); color: #67e8f9; border: 1px solid rgba(6, 182, 212, 0.3);">
-              NL
+            <div class="brand-icon">
+              <img src="/assets/brand/whatsapp.png" alt="WhatsApp" />
             </div>
             <div style="min-width: 0;">
               <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Narahubung (Lifa)</div>
@@ -480,15 +526,29 @@
           <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
         </a>
 
-        <!-- 4. Gmail SEMA -->
+        <!-- 3. Gmail SEMA -->
         <a href="mailto:semamikompwt@gmail.com" class="glass-surface-interactive contact-card" style="border-color: rgba(244, 63, 94, 0.3);">
           <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
-            <div class="contact-icon" style="background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3);">
-              ✉️
+            <div class="brand-icon">
+              <img src="/assets/brand/gmail.png" alt="Gmail" />
             </div>
             <div style="min-width: 0;">
-              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Gmail SEMA</div>
+              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Gmail Resmi SEMA</div>
               <div style="font-size: 0.68rem; color: #fb7185; font-family: monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">semamikompwt@gmail.com</div>
+            </div>
+          </div>
+          <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
+        </a>
+
+        <!-- 4. Instagram Resmi SEMA -->
+        <a href="https://www.instagram.com/sema.amikompwt?srtk=d3RzZzZvc3ZnNjNv" target="_blank" rel="noopener noreferrer" class="glass-surface-interactive contact-card" style="border-color: rgba(217, 70, 239, 0.3);">
+          <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
+            <div class="brand-icon">
+              <img src="/assets/brand/instagram.png" alt="Instagram" />
+            </div>
+            <div style="min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">Instagram Resmi SEMA</div>
+              <div style="font-size: 0.68rem; color: #e879f9; font-family: monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@sema.amikompwt</div>
             </div>
           </div>
           <span style="color: #94a3b8; font-size: 0.8rem;">↗</span>
@@ -525,7 +585,7 @@
       <details class="glass-surface category-group" data-category="uud" open>
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">📖</span>
+            <span class="category-logo"><img src="/assets/brand/lembaga-kemahasiswaan.png" alt="Logo resmi Lembaga Kemahasiswaan" /></span>
             <div>
               <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">UNDANG-UNDANG DASAR</div>
               <div style="font-size: 0.68rem; color: #94a3b8;">Konstitusi Tertinggi Lembaga Kemahasiswaan</div>
@@ -541,7 +601,7 @@
             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
               <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Dasar Lembaga Kemahasiswaan Tahun 2026</div>
               <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8;">Diperbarui: Musyawarah Mahasiswa 2026</div>
-              <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.2rem;">
+              <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.2rem;">
                 <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
                 <a href="https://drive.google.com/file/d/1g-_3zYwPwlVO9Vj4ouMeSs_tGuVRw_7X/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
                   <span>▲ Buka di Google Drive</span>
@@ -556,7 +616,7 @@
       <details class="glass-surface category-group" data-category="uu-turunan" open>
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">⚖️</span>
+            <span class="category-logo"><img src="/assets/brand/lembaga-kemahasiswaan.png" alt="Logo resmi Lembaga Kemahasiswaan" /></span>
             <div>
               <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">UNDANG-UNDANG TURUNAN</div>
               <div style="font-size: 0.68rem; color: #94a3b8;">Produk Legislasi Lembaga Kemahasiswaan</div>
@@ -571,7 +631,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="Undang-Undang Lembaga Kemahasiswaan Nomor I Tahun 2021 Tentang Musyawarah Mahasiswa">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Lembaga Kemahasiswaan Nomor I Tahun 2021 Tentang Musyawarah Mahasiswa</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman tata kerja Musyawarah Mahasiswa Universitas Amikom Purwokerto.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1RDD2j2AblYdQ4ptybvqnf_Dc4__ELUaN/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
                 <span>▲ Buka di Google Drive</span>
@@ -582,7 +642,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="Undang-Undang Lembaga Kemahasiswaan Nomor II Tahun 2026 tentang Keorganisasian">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Lembaga Kemahasiswaan Nomor II Tahun 2026 tentang Keorganisasian</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketentuan mengenai penyelenggaraan kehidupan organisasi kemahasiswaan dan tata kelola lembaga kemahasiswaan sesuai ruang lingkup regulasi.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1QyGhPezJjD6V4WZpdaDfcglH7ibPNXrS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
                 <span>▲ Buka di Google Drive</span>
@@ -593,7 +653,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="Undang-Undang Lembaga Kemahasiswaan Nomor III Tahun 2026 tentang Pemilihan Umum Mahasiswa Raya">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Undang-Undang Lembaga Kemahasiswaan Nomor III Tahun 2026 tentang Pemilihan Umum Mahasiswa Raya</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Landasan penyelenggaraan Pemira, termasuk pembentukan dan pelaksanaan tugas Panitia Pemira serta pengawasan pemilihan mahasiswa.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1zYd5nup1qF4ajG2_cZokd4o4pXnBOpy1/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive">
                 <span>▲ Buka di Google Drive</span>
@@ -607,10 +667,10 @@
       <details class="glass-surface category-group" data-category="regulasi-turunan">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">📑</span>
+            <span class="category-logo"><img src="/assets/brand/lembaga-kemahasiswaan.png" alt="Logo resmi Lembaga Kemahasiswaan" /></span>
             <div>
               <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">REGULASI TURUNAN</div>
-              <div style="font-size: 0.68rem; color: #94a3b8;">Tata Tertib, Kode Etik &amp; Petunjuk Teknis</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Regulasi Dibawah Undang-Undang</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -622,7 +682,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tata tertib musyawarah mahasiswa muswa tata cara persidangan pimpinan sidang peserta forum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Tata Tertib Musyawarah Mahasiswa</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketentuan pelaksanaan musyawarah, tata cara persidangan, hak peserta, dan mekanisme pengambilan keputusan forum.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1cBUNub9Auepse-GREdnHN0kVW_LPkQJc/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -631,7 +691,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="peraturan sema kode etik senator anggota lembaga kemahasiswaan integritas disiplin sanksi">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Kode Etik Lembaga Kemahasiswaan 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman etika, integritas, tanggung jawab, dan kedisiplinan bagi anggota lembaga kemahasiswaan.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1J14zJCnJO99OaIE1HA3APqZazskhVzQt/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -640,7 +700,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="juklak anggaran 2026 petunjuk pelaksanaan anggaran ormawa proposal rencana anggaran biaya rab verifikasi komisi anggaran">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Juklak Anggaran 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman pelaksanaan anggaran dan acuan verifikasi pengajuan anggaran kegiatan organisasi kemahasiswaan.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1-I53xL6ZkpbjGZlglBuDewHdEALwuu3i/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -649,7 +709,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="juklak juknis standarisasi ukm 2026 standarisasi organisasi kemahasiswaan penilaian evaluasi proposal program kerja lpj indikator kinerja">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Juklak dan Juknis Standarisasi UKM 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Pedoman standardisasi dan instrumen penilaian UKM sebagai acuan evaluasi tata kelola, program kerja, dan pertanggungjawaban organisasi.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1Pi9v-L4DoZRybp2m4mdda8xpSC91FlIY/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -661,9 +721,9 @@
       <details class="glass-surface category-group" data-category="tap-muswa">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">🏛️</span>
+            <span class="category-logo"><img src="/assets/brand/lembaga-kemahasiswaan.png" alt="Logo resmi Lembaga Kemahasiswaan" /></span>
             <div>
-              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KETETAPAN MUSYAWARAH MAHASISWA (TAP-MUSWA)</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KETETAPAN MUSYAWARAH MAHASISWA</div>
               <div style="font-size: 0.68rem; color: #94a3b8;">Keputusan Tertinggi Forum Muswa Amikom</div>
             </div>
           </div>
@@ -676,7 +736,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="ketetapan muswa ii 2026 pengesahan uu lk ii keorganisasian lembaga kemahasiswaan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Ketetapan Muswa II tentang Pengesahan UU LK II Tahun 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Penetapan dan pengesahan UU LK II Tahun 2026 sebagai bagian dari landasan regulasi lembaga kemahasiswaan.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/177SfjlmvdfrGxaYCnfAfofEt91IiMol1/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -685,7 +745,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="ketetapan muswa ii 2026 pengesahan uud lk undang undang dasar lembaga kemahasiswaan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Ketetapan Muswa II tentang Pengesahan UUD LK Tahun 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Penetapan dan pengesahan Undang-Undang Dasar Lembaga Kemahasiswaan sebagai landasan konstitusional organisasi kemahasiswaan.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1b5cWmuT45B7x-ooOMjgCwHJ3j_vcc11L/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -694,7 +754,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tap muswasus 2026 pemberhentian wakil presiden bem kabinet niskala juang ketetapan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">TAP Muswasus tentang Pemberhentian Wakil Presiden BEM Tahun 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan Musyawarah Mahasiswa Luar Biasa mengenai pemberhentian Wakil Presiden BEM Tahun 2026.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1avYmgKAtyO5NmJJo--mmgzJ1GlkAbDUY/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -703,7 +763,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tap muswasus 2026 penetapan panitia pemira panwas pemilihan umum mahasiswa raya pengawasan pemilihan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">TAP Muswasus tentang Penetapan Panitia Pemira dan Panwas Pemira Tahun 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan mengenai penetapan Panitia Pemilihan Umum Mahasiswa Raya (Pemira) dan perangkat pengawasan Pemira Tahun 2026.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1t3jJeiL6Y7FfrkINEMQ7zIpKOlvXOUfs/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -712,7 +772,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="tap muswasus 2026 pengesahan undang undang lembaga kemahasiswaan uu lk nomor iii pemira">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">TAP Muswasus tentang Pengesahan UU LK Nomor III Tahun 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan pengesahan Undang-Undang Lembaga Kemahasiswaan Nomor III Tahun 2026 sebagai landasan regulasi Pemira.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1BOGV6D66Q4pV58rHFFKWxOdYoB-GDQz5/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -724,10 +784,10 @@
       <details class="glass-surface category-group" data-category="internal-sema">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">👥</span>
+            <span class="category-logo"><img src="/assets/brand/sema-hd.png" alt="Logo resmi SEMA HD" /></span>
             <div>
               <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">SENAT MAHASISWA</div>
-              <div style="font-size: 0.68rem; color: #94a3b8;">Konstitusi Internal &amp; Alokasi Parlemen</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">AD ART SEMA &amp; Alokasi Anggaran 2026</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -739,7 +799,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="ad art sema 2026 anggaran dasar anggaran rumah tangga senat mahasiswa struktur organisasi tugas wewenang keanggotaan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Anggaran Dasar dan Anggaran Rumah Tangga (AD/ART) SEMA 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Landasan organisasi yang mengatur kedudukan, struktur, keanggotaan, tugas, wewenang, dan mekanisme kerja Senat Mahasiswa.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1NRgKfa1EJxoMEH1xTwJoSf17CM1TYCfH/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -748,7 +808,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="alokasi anggaran 2026 anggaran ormawa sema bem ukm hmps distribusi dana keuangan kegiatan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">Dokumen Alokasi Anggaran Tahun 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Dokumen alokasi anggaran organisasi kemahasiswaan sebagai acuan distribusi dan perencanaan pendanaan kegiatan tahun 2026.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1MKNHj9Dts5WTQ1H0izGfQP2xkA89KV0a/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -756,13 +816,13 @@
         </div>
       </details>
 
-      <!-- 6. KETETAPAN SEMA (TAP-SEMA) -->
+      <!-- 6. KETETAPAN SEMA -->
       <details class="glass-surface category-group" data-category="tap-sema">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">📜</span>
+            <span class="category-logo"><img src="/assets/brand/sema-hd.png" alt="Logo resmi SEMA HD" /></span>
             <div>
-              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KETETAPAN SEMA (TAP-SEMA)</div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KETETAPAN SEMA</div>
               <div style="font-size: 0.68rem; color: #94a3b8;">Ketetapan Resmi Senat Mahasiswa</div>
             </div>
           </div>
@@ -775,7 +835,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="013 ketetapan sema penonaktifan ukm racana universitas amikom purwokerto organisasi kemahasiswaan evaluasi status kelembagaan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">013. Ketetapan SEMA tentang Penonaktifan UKM Racana Universitas Amikom Purwokerto</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Ketetapan Senat Mahasiswa mengenai penonaktifan Unit Kegiatan Mahasiswa Racana Universitas Amikom Purwokerto.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1DUUouVACL4LXGyOXusSa4QNHCB3iJRJP/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -787,10 +847,10 @@
       <details class="glass-surface category-group" data-category="sk-sema" open>
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">🛡️</span>
+            <span class="category-logo"><img src="/assets/brand/sema-hd.png" alt="Logo resmi SEMA HD" /></span>
             <div>
               <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KEPUTUSAN SEMA (SURAT KEPUTUSAN / SK)</div>
-              <div style="font-size: 0.68rem; color: #94a3b8;">Penetapan Resmi Senat Mahasiswa</div>
+              <div style="font-size: 0.68rem; color: #94a3b8;">Keputusan Resmi Senat Mahasiswa</div>
             </div>
           </div>
           <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -802,7 +862,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="012 sk sema penurunan badan semi otonom bso status kelembagaan organisasi kemahasiswaan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">012. SK-SEMA tentang Penurunan Status Badan Semi Otonom (BSO)</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Keputusan Senat Mahasiswa mengenai penurunan status kelembagaan Badan Semi Otonom.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1nU4m-sTpS85a0csDtpdq9l_d0TMEBA_T/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -811,7 +871,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="016 sk sema pengangkatan badan otonom hmps himpunan mahasiswa program studi kelembagaan kepengurusan">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">016. SK-SEMA tentang Pengangkatan Badan Otonom HMPS</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Keputusan Senat Mahasiswa mengenai pengangkatan Badan Otonom Himpunan Mahasiswa Program Studi (HMPS).</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1CNytKiw0Tnd8T6PBKTGQ9Zw0Csji9h52/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -820,7 +880,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="112 sk sema pengangkatan anggota legislatif muda 2026 lm komisi sema kaderisasi legislasi">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">112. SK-SEMA tentang Pengangkatan Anggota Legislatif Muda 2026</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Keputusan pengangkatan anggota Legislatif Muda sebagai bagian dari pengembangan kader dan penguatan fungsi legislasi SEMA.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1hna2-AH9ztgoQY5pcbqGIuQOydbj9bn5/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -832,7 +892,7 @@
       <details class="glass-surface category-group" data-category="sk-ketua-umum-sema" open>
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
-            <span style="font-size: 1.1rem;">🖋️</span>
+            <span class="category-logo"><img src="/assets/brand/sema-hd.png" alt="Logo resmi SEMA HD" /></span>
             <div>
               <div style="font-size: 0.8rem; font-weight: 700; color: #fff; text-transform: uppercase;">KEPUTUSAN KETUA UMUM SEMA</div>
               <div style="font-size: 0.68rem; color: #94a3b8;">Keputusan Resmi Ketua Umum Senat Mahasiswa</div>
@@ -848,7 +908,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="092 sk pengangkatan anggota sema sekretaris jenderal ii ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">092. SK Pengangkatan Anggota SEMA (Sekretaris Jenderal II)</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan anggota pada jabatan Sekretaris Jenderal II.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1lvotEnQnOoD0aXwuTm7yqP2wHcbAYpUO/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -858,7 +918,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="094 sk pengangkatan anggota sema staff komisi c ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">094. SK Pengangkatan Anggota SEMA (Staf Komisi C)</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan anggota sebagai staf Komisi C.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/18AyxchTOn_vegB_-6d45rSceQDY89dQL/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -868,7 +928,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="159 sk paw staf komisi a pergantian antarwaktu ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">159. SK PAW Staf Komisi A</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan mengenai Pergantian Antarwaktu (PAW) staf Komisi A SEMA.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/10lPH8IyXl3bTXzv7bLy1VPMqaitAbT8L/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -878,7 +938,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="190 sk pemberhentian ketua komisi a ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">190. SK Pemberhentian Ketua Komisi A</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pemberhentian Ketua Komisi A.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1GzEIZhTaVhw0IdOiO-yVfX6HEroHimr2/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -888,7 +948,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="258 sk pemberhentian ketua komisi b ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">258. SK Pemberhentian Ketua Komisi B</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pemberhentian Ketua Komisi B.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1wDlV6Ic2gsIllN0EeSrTmsfvUZ9dOTV7/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -898,7 +958,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="259 sk pemberhentian ketua komisi c ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">259. SK Pemberhentian Ketua Komisi C</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pemberhentian Ketua Komisi C.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/10AGnyoKN6ZoE249RSk6W0zovFrvlTKdG/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -908,7 +968,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="265 sk pengangkatan ketua komisi a ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">265. SK Pengangkatan Ketua Komisi A</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan Ketua Komisi A.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1XQPy6IgFuCKs85fn1zlEWpW_X2pRWKja/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -918,7 +978,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="264 sk pengangkatan ketua komisi b ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">264. SK Pengangkatan Ketua Komisi B</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan Ketua Komisi B.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1_lKE4hpAWLCI8tGEe2q7v5vPaX12fpcU/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -928,7 +988,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="266 sk pengangkatan ketua komisi c ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">266. SK Pengangkatan Ketua Komisi C</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan Ketua Komisi C.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1rX0kmwFPnhdIWpIX58tFsEo-ukh_RmMA/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -938,7 +998,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="336 sk pembebasan tugas sementara ketua komisi b plt ketua komisi b ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">336. SK Pembebasan Tugas Sementara Ketua Komisi B dan Penunjukan Plt Ketua Komisi B</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan tentang pembebasan tugas sementara Ketua Komisi B dan penunjukan Pelaksana Tugas (Plt) Ketua Komisi B.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1IqxuzmDMjncSx6dqu_g1ViyBqQ9v-Sz5/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>
@@ -948,7 +1008,7 @@
           <div class="glass-subcard doc-item" style="padding: 0.75rem;" data-keywords="337 sk pengangkatan anggota sema staf komisi b ketum">
             <div class="doc-title" style="font-size: 0.8rem; font-weight: 600; color: #fff;">337. SK Pengangkatan Anggota SEMA (Staf Komisi B)</div>
             <div class="doc-desc" style="font-size: 0.68rem; color: #94a3b8; margin-top: 0.1rem;">Surat Keputusan Ketua Umum SEMA tentang pengangkatan anggota sebagai staf Komisi B.</div>
-            <div style="display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.4rem;">
               <span style="font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);">READ-ONLY</span>
               <a href="https://drive.google.com/file/d/1lEL5vWiXjxNen6cArF--GkLh3bEjwizd/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="glass-btn-drive"><span>▲ Buka di Google Drive</span></a>
             </div>

@@ -107,7 +107,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     id: 'regulasi-turunan',
     code: 'Regulasi',
     title: 'REGULASI TURUNAN',
-    subtitle: 'Tata Tertib Musyawarah Mahasiswa, Kode Etik Lembaga Kemahasiswaan 2026, Juklak Anggaran & Juklak Juknis Standarisasi Penilaian',
+    subtitle: 'Regulasi Dibawah Undang-Undang',
     iconName: 'sliders',
     accentColor: 'from-cyan-500/20 to-teal-600/20 text-cyan-300 border-cyan-500/30',
     documents: [
@@ -172,7 +172,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
   {
     id: 'tap-muswa',
     code: 'TAP-MUSWA',
-    title: 'KETETAPAN MUSYAWARAH MAHASISWA (TAP-MUSWA)',
+    title: 'KETETAPAN MUSYAWARAH MAHASISWA',
     subtitle: 'Keputusan Tertinggi Forum Muswa Amikom',
     iconName: 'award',
     accentColor: 'from-amber-500/20 to-orange-600/20 text-amber-300 border-amber-500/30',
@@ -253,7 +253,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     id: 'internal-sema',
     code: 'Internal SEMA',
     title: 'SENAT MAHASISWA',
-    subtitle: 'Konstitusi Internal & Alokasi Parlemen',
+    subtitle: 'AD ART SEMA & Alokasi Anggaran 2026',
     iconName: 'users',
     accentColor: 'from-blue-500/20 to-indigo-600/20 text-blue-300 border-blue-500/30',
     documents: [
@@ -290,7 +290,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
   {
     id: 'tap-sema',
     code: 'TAP SEMA',
-    title: 'KETETAPAN SEMA (TAP-SEMA)',
+    title: 'KETETAPAN SEMA',
     subtitle: 'Ketetapan Resmi Senat Mahasiswa',
     iconName: 'check-square',
     accentColor: 'from-violet-500/20 to-purple-600/20 text-violet-300 border-violet-500/30',
@@ -315,7 +315,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     id: 'sk-sema',
     code: 'Keputusan (SK)',
     title: 'KEPUTUSAN SEMA (SURAT KEPUTUSAN / SK)',
-    subtitle: 'Penetapan Resmi Senat Mahasiswa',
+    subtitle: 'Keputusan Resmi Senat Mahasiswa',
     iconName: 'shield',
     accentColor: 'from-rose-500/20 to-pink-600/20 text-rose-300 border-rose-500/30',
     defaultOpen: true,
