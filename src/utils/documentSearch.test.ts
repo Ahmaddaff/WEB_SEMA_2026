@@ -34,7 +34,7 @@ test('filterDocuments accurately filters by query "PEMIRA"', () => {
 });
 
 test('filterDocuments filters by category code', () => {
-  const result = filterDocuments(DOCUMENT_CATEGORIES, '', 'Keputusan (SK)');
+  const result = filterDocuments(DOCUMENT_CATEGORIES, '', 'SK-SEMA');
   assert.equal(result.categories.length, 1);
   assert.equal(result.categories[0].id, 'sk-sema');
   assert.equal(result.categories[0].documents.length, 3);

@@ -173,7 +173,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     id: 'tap-muswa',
     code: 'TAP-MUSWA',
     title: 'KETETAPAN MUSYAWARAH MAHASISWA',
-    subtitle: 'Keputusan Tertinggi Forum Muswa Amikom',
+    subtitle: 'Hasil dari Musyawarah Mahasiswa Lembaga Kemahasiswaan',
     iconName: 'award',
     accentColor: 'from-amber-500/20 to-orange-600/20 text-amber-300 border-amber-500/30',
     documents: [
@@ -251,7 +251,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
   },
   {
     id: 'internal-sema',
-    code: 'Internal SEMA',
+    code: 'SEMA 2026',
     title: 'SENAT MAHASISWA',
     subtitle: 'AD ART SEMA & Alokasi Anggaran 2026',
     iconName: 'users',
@@ -289,7 +289,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
   },
   {
     id: 'tap-sema',
-    code: 'TAP SEMA',
+    code: 'TAP-SEMA',
     title: 'KETETAPAN SEMA',
     subtitle: 'Ketetapan Resmi Senat Mahasiswa',
     iconName: 'check-square',
@@ -313,8 +313,8 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
   },
   {
     id: 'sk-sema',
-    code: 'Keputusan (SK)',
-    title: 'KEPUTUSAN SEMA (SURAT KEPUTUSAN / SK)',
+    code: 'SK-SEMA',
+    title: 'KEPUTUSAN SEMA',
     subtitle: 'Keputusan Resmi Senat Mahasiswa',
     iconName: 'shield',
     accentColor: 'from-rose-500/20 to-pink-600/20 text-rose-300 border-rose-500/30',
@@ -366,7 +366,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
   },
   {
     id: 'sk-ketua-umum-sema',
-    code: 'SK Ketum',
+    code: 'SK-Ketum',
     title: 'KEPUTUSAN KETUA UMUM SEMA',
     subtitle: 'Keputusan Resmi Ketua Umum Senat Mahasiswa',
     iconName: 'stamp',

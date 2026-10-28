@@ -62,10 +62,10 @@ export default function App() {
     { label: 'UU Turunan', value: 'UU Turunan' },
     { label: 'Regulasi', value: 'Regulasi' },
     { label: 'TAP-MUSWA', value: 'TAP-MUSWA' },
-    { label: 'Internal SEMA', value: 'Internal SEMA' },
-    { label: 'TAP SEMA', value: 'TAP SEMA' },
-    { label: 'Keputusan (SK)', value: 'Keputusan (SK)' },
-    { label: 'SK Ketum', value: 'SK Ketum' },
+    { label: 'SEMA 2026', value: 'SEMA 2026' },
+    { label: 'TAP-SEMA', value: 'TAP-SEMA' },
+    { label: 'SK-SEMA', value: 'SK-SEMA' },
+    { label: 'SK-Ketum', value: 'SK-Ketum' },
   ];
 
   // Perform search and filter
@@ -163,6 +163,9 @@ export default function App() {
           </h1>
           <p className="mt-1.5 text-xs sm:text-sm text-slate-300/90 max-w-md font-medium">
             Official Portal of Senat Mahasiswa Universitas Amikom Purwokerto
+          </p>
+          <p className="mt-0.5 text-xs sm:text-sm text-slate-300/90 max-w-md font-medium">
+            Periode 2025/2026
           </p>
         </header>
 
