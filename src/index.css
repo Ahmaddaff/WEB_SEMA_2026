@@ -127,6 +127,26 @@
   }
 }
 
+/* Detak jantung logo: dua ketukan lalu jeda */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.055);
+  }
+  24% {
+    transform: scale(1);
+  }
+  36% {
+    transform: scale(1.045);
+  }
+  54% {
+    transform: scale(1);
+  }
+}
+
 .animate-liquid-bg {
   background: linear-gradient(-45deg, #090a18, #180e29, #0d1b2a, #161032, #0b192c);
   background-size: 400% 400%;
@@ -151,6 +171,25 @@
 
 .animate-aura-spin {
   animation: auraSpin 16s linear infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2.4s ease-in-out infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Hormati preferensi pengguna yang mengurangi gerakan */
+@media (prefers-reduced-motion: reduce) {
+  .animate-heartbeat,
+  .animate-aura-spin,
+  .animate-pulse-glow,
+  .animate-orb-1,
+  .animate-orb-2,
+  .animate-orb-3,
+  .animate-liquid-bg {
+    animation: none !important;
+  }
 }
 
 /* Glassmorphism Classes */
@@ -215,7 +254,7 @@
 }
 
 /* ============================================================
-   KARTU KONTAK — permukaan solid + aksen tepi kiri
+   KARTU KONTAK — permukaan solid, tepian polos (netral)
    Tujuan: setiap kartu terbaca sebagai kotak tersendiri dan
    tidak menyatu dengan kartu di atasnya (dianggap satu bagian).
    ============================================================ */
@@ -230,22 +269,11 @@
     background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.contact-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 3px;
-  background: linear-gradient(180deg, #34d399, #22d3ee);
-  opacity: 0.9;
-}
-
 .contact-card:hover {
   background: linear-gradient(160deg, rgba(33, 37, 64, 0.97), rgba(18, 20, 38, 0.98));
   transform: translateY(-2px);
   box-shadow: 0 18px 34px -14px rgba(0, 0, 0, 1), inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 0 0 1px rgba(52, 211, 153, 0.25);
+    0 0 0 1px rgba(255, 255, 255, 0.14);
 }
 
 /* Brand Icon - logo resmi WhatsApp / Gmail pada kartu kontak */

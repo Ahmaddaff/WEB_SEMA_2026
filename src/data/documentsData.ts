@@ -3,6 +3,8 @@ export interface LegalDocument {
   nomor: string;
   title: string;
   description: string;
+  /** Keterangan "Diperbarui: ..." yang tampil di bawah judul dokumen */
+  updatedAt?: string;
   categoryId: string;
   categoryName: string;
   status: 'READ-ONLY' | 'BERLAKU' | 'ARSIP';
@@ -38,7 +40,8 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
         id: 'uud-lk-2026',
         nomor: 'UUD LK 2026',
         title: 'Undang-Undang Dasar Lembaga Kemahasiswaan Tahun 2026',
-        description: 'Diperbarui: Musyawarah Mahasiswa 2026',
+        description: '',
+        updatedAt: 'Musyawarah Mahasiswa II Tahun 2026',
         categoryId: 'uud',
         categoryName: 'Undang-Undang Dasar',
         status: 'READ-ONLY',
@@ -64,6 +67,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
         nomor: 'UU LK No. I Tahun 2021',
         title: 'Undang-Undang Lembaga Kemahasiswaan Nomor I Tahun 2021 Tentang Musyawarah Mahasiswa',
         description: 'Pedoman tata kerja Musyawarah Mahasiswa Universitas Amikom Purwokerto.',
+        updatedAt: 'Musyawarah Mahasiswa Tahun 2021',
         categoryId: 'uu-turunan',
         categoryName: 'Undang-Undang Turunan',
         status: 'READ-ONLY',
@@ -78,6 +82,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
         nomor: 'UU LK No. II Tahun 2026',
         title: 'Undang-Undang Lembaga Kemahasiswaan Nomor II Tahun 2026 tentang Keorganisasian',
         description: 'Ketentuan mengenai penyelenggaraan kehidupan organisasi kemahasiswaan dan tata kelola lembaga kemahasiswaan sesuai ruang lingkup regulasi.',
+        updatedAt: 'Musyawarah Mahasiswa II Tahun 2026',
         categoryId: 'uu-turunan',
         categoryName: 'Undang-Undang Turunan',
         status: 'READ-ONLY',
@@ -92,6 +97,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
         nomor: 'UU LK No. III Tahun 2026',
         title: 'Undang-Undang Lembaga Kemahasiswaan Nomor III Tahun 2026 tentang Pemilihan Umum Mahasiswa Raya',
         description: 'Landasan penyelenggaraan Pemira, termasuk pembentukan dan pelaksanaan tugas Panitia Pemira serta pengawasan pemilihan mahasiswa.',
+        updatedAt: 'Musyawarah Mahasiswa Khusus Tahun 2026',
         categoryId: 'uu-turunan',
         categoryName: 'Undang-Undang Turunan',
         status: 'READ-ONLY',
@@ -173,7 +179,7 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     id: 'tap-muswa',
     code: 'TAP-MUSWA',
     title: 'KETETAPAN MUSYAWARAH MAHASISWA',
-    subtitle: 'Hasil dari Musyawarah Mahasiswa Lembaga Kemahasiswaan',
+    subtitle: 'Hasil dari Musyawarah Mahasiswa',
     iconName: 'award',
     accentColor: 'from-amber-500/20 to-orange-600/20 text-amber-300 border-amber-500/30',
     documents: [

@@ -144,9 +144,11 @@ export default function App() {
               <div className="pointer-events-none absolute inset-1.5 rounded-full border border-white/15" />
               {/* Circular HD Emblem Image from User Asset */}
               <div
-                className="relative w-full h-full bg-contain bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-105"
+                className="relative w-full h-full bg-contain bg-center bg-no-repeat animate-heartbeat"
                 style={{
                   backgroundImage: `url(/assets/aistudio/Logo_Sema_HD_ef634b2e.png)`,
+                  backgroundSize: '94%',
+                  backgroundPosition: 'center',
                 }}
                 role="img"
                 aria-label="Logo Senat Mahasiswa Universitas Amikom Purwokerto"
@@ -189,7 +191,7 @@ export default function App() {
               href="https://wa.me/628212649382"
               target="_blank"
               rel="noopener noreferrer"
-              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-white/10 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -217,7 +219,7 @@ export default function App() {
               href="https://wa.me/6288228951004"
               target="_blank"
               rel="noopener noreferrer"
-              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-white/10 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -243,7 +245,7 @@ export default function App() {
             {/* 3. Gmail SEMA */}
             <a
               href="mailto:semamikompwt@gmail.com"
-              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-white/10 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -271,7 +273,7 @@ export default function App() {
               href="https://www.instagram.com/sema.amikompwt?srtk=d3RzZzZvc3ZnNjNv"
               target="_blank"
               rel="noopener noreferrer"
-              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-white/10 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -417,7 +419,7 @@ export default function App() {
                       />
                     </span>
                     <div className="min-w-0 text-left">
-                      <h3 className="text-xs sm:text-sm font-bold text-white tracking-wide line-clamp-2 uppercase leading-snug">
+                      <h3 className="text-xs sm:text-sm font-bold text-white tracking-wide uppercase leading-snug">
                         {category.title}
                       </h3>
                       <p className="text-[11px] text-slate-400 line-clamp-2 mt-0.5 leading-relaxed">
@@ -461,9 +463,16 @@ export default function App() {
                               <h4 className="text-xs sm:text-sm font-semibold text-white/95 leading-snug group-hover/item:text-purple-200 transition-colors">
                                 {renderHighlightedText(doc.title, searchQuery)}
                               </h4>
-                              <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
-                                {doc.description}
-                              </p>
+                              {doc.description && (
+                                <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                                  {doc.description}
+                                </p>
+                              )}
+                              {doc.updatedAt && (
+                                <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                                  Diperbarui: {doc.updatedAt}
+                                </p>
+                              )}
                               {doc.tags && (
                                 <div className="flex flex-wrap gap-1 mt-1.5">
                                   {doc.tags.slice(0, 3).map((tag, i) => (
@@ -564,9 +573,16 @@ export default function App() {
               <h3 id="modal-doc-title" className="text-base font-bold text-white leading-snug">
                 {activeModalDoc.title}
               </h3>
-              <p className="text-xs text-slate-300/90 mt-1">
-                {activeModalDoc.description}
-              </p>
+              {activeModalDoc.description && (
+                <p className="text-xs text-slate-300/90 mt-1">
+                  {activeModalDoc.description}
+                </p>
+              )}
+              {activeModalDoc.updatedAt && (
+                <p className="text-xs text-slate-400 mt-1">
+                  Diperbarui: {activeModalDoc.updatedAt}
+                </p>
+              )}
             </div>
 
             {/* Document Attributes */}
