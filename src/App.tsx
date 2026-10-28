@@ -132,14 +132,19 @@ export default function App() {
         {/* HEADER / PROFILE SECTION */}
         <header className="flex flex-col items-center text-center">
           {/* Logo with Liquid Glass Aura Ring */}
-          <div className="relative group mb-4">
-            <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-purple-500 via-indigo-500 to-cyan-400 opacity-60 blur-md group-hover:opacity-90 transition duration-500 animate-pulse-glow" />
-            
+          <div className="relative group mb-5">
+            {/* Rotating conic aura ring */}
+            <div className="absolute -inset-3 rounded-full bg-[conic-gradient(from_0deg,#a855f7,#6366f1,#22d3ee,#a855f7)] opacity-50 blur-lg animate-aura-spin transition-opacity duration-500 group-hover:opacity-80" />
+            {/* Soft ambient glow */}
+            <div className="absolute -inset-7 rounded-full bg-purple-500/25 blur-2xl animate-pulse-glow" />
+
             {/* Glass Border & Frame */}
-            <div className="relative w-24 h-24 rounded-full p-2 glass-surface border border-white/30 shadow-2xl flex items-center justify-center overflow-hidden">
+            <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2.5 glass-surface border border-white/35 shadow-[0_22px_55px_-18px_rgba(139,92,246,0.75)] flex items-center justify-center overflow-hidden">
+              {/* Inner hairline ring */}
+              <div className="pointer-events-none absolute inset-1.5 rounded-full border border-white/15" />
               {/* Circular HD Emblem Image from User Asset */}
               <div
-                className="w-full h-full bg-contain bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-105"
+                className="relative w-full h-full bg-contain bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-105"
                 style={{
                   backgroundImage: `url(/assets/aistudio/Logo_Sema_HD_ef634b2e.png)`,
                 }}
@@ -170,24 +175,21 @@ export default function App() {
         </header>
 
         {/* QUICK CONTACTS & WHATSAPP / GMAIL SECTION */}
-        <section className="mt-6 space-y-3" aria-label="Kontak Cepat WhatsApp dan Akun Resmi SEMA">
-          <div className="flex items-center justify-between px-1">
+        <section className="mt-7 space-y-3" aria-label="Media resmi Senat Mahasiswa">
+          <div className="flex items-center px-1">
             <span className="text-[11px] uppercase tracking-wider font-bold text-slate-300 flex items-center gap-1.5">
               <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
-              Kontak WhatsApp &amp; Akun Resmi SEMA
-            </span>
-            <span className="text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-              Online
+              Media resmi Senat Mahasiswa
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* 1. WhatsApp SEMA */}
             <a
               href="https://wa.me/628212649382"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-emerald-500/25 group transition-all"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -215,7 +217,7 @@ export default function App() {
               href="https://wa.me/6288228951004"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-cyan-500/25 group transition-all"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -227,10 +229,10 @@ export default function App() {
                   />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
+                  <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
                     Narahubung (Lifa)
                   </div>
-                  <div className="text-[10px] text-cyan-300 font-sans truncate">
+                  <div className="text-[10px] text-emerald-400 font-sans truncate">
                     wa.me/6288228951004
                   </div>
                 </div>
@@ -241,7 +243,7 @@ export default function App() {
             {/* 3. Gmail SEMA */}
             <a
               href="mailto:semamikompwt@gmail.com"
-              className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-rose-500/25 group transition-all"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -253,10 +255,10 @@ export default function App() {
                   />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-rose-300 transition-colors truncate">
-                    Gmail Resmi SEMA
+                  <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
+                    Gmail SEMA
                   </div>
-                  <div className="text-[10px] text-rose-300 font-sans truncate">
+                  <div className="text-[10px] text-emerald-400 font-sans truncate">
                     semamikompwt@gmail.com
                   </div>
                 </div>
@@ -264,12 +266,12 @@ export default function App() {
               <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors flex-shrink-0 ml-1" />
             </a>
 
-            {/* 4. Instagram Resmi SEMA */}
+            {/* 4. Instagram SEMA */}
             <a
               href="https://www.instagram.com/sema.amikompwt?srtk=d3RzZzZvc3ZnNjNv"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-surface-interactive p-3 rounded-xl flex items-center justify-between border border-fuchsia-500/25 group transition-all"
+              className="contact-card p-3 rounded-xl flex items-center justify-between border border-emerald-500/30 group"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="brand-icon">
@@ -281,10 +283,10 @@ export default function App() {
                   />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-fuchsia-300 transition-colors truncate">
-                    Instagram Resmi SEMA
+                  <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
+                    Instagram SEMA
                   </div>
-                  <div className="text-[10px] text-fuchsia-300 font-sans truncate">
+                  <div className="text-[10px] text-emerald-400 font-sans truncate">
                     @sema.amikompwt
                   </div>
                 </div>
