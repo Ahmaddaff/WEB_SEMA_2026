@@ -199,7 +199,7 @@ export default function App() {
                   <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
                     SEMA Amikom
                   </div>
-                  <div className="text-[10px] text-emerald-400 font-mono truncate">
+                  <div className="text-[10px] text-emerald-400 font-sans truncate">
                     wa.me/628212649382
                   </div>
                 </div>
@@ -227,7 +227,7 @@ export default function App() {
                   <div className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
                     Narahubung (Lifa)
                   </div>
-                  <div className="text-[10px] text-cyan-300 font-mono truncate">
+                  <div className="text-[10px] text-cyan-300 font-sans truncate">
                     wa.me/6288228951004
                   </div>
                 </div>
@@ -253,7 +253,7 @@ export default function App() {
                   <div className="text-xs font-bold text-white group-hover:text-rose-300 transition-colors truncate">
                     Gmail Resmi SEMA
                   </div>
-                  <div className="text-[10px] text-rose-300 font-mono truncate">
+                  <div className="text-[10px] text-rose-300 font-sans truncate">
                     semamikompwt@gmail.com
                   </div>
                 </div>
@@ -281,7 +281,7 @@ export default function App() {
                   <div className="text-xs font-bold text-white group-hover:text-fuchsia-300 transition-colors truncate">
                     Instagram Resmi SEMA
                   </div>
-                  <div className="text-[10px] text-fuchsia-300 font-mono truncate">
+                  <div className="text-[10px] text-fuchsia-300 font-sans truncate">
                     @sema.amikompwt
                   </div>
                 </div>

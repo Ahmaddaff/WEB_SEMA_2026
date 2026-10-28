@@ -1,5 +1,54 @@
 @import "tailwindcss";
 
+/* ============================================================
+   TIPOGRAFI — General Sans (self-hosted, alternatif Agrandir)
+   Free for commercial use (Fontshare / Indian Type Foundry).
+   File: public/fonts/general-sans/*.woff2
+   ============================================================ */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans/general-sans-300.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans/general-sans-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans/general-sans-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans/general-sans-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans/general-sans-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'General Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -9,7 +58,7 @@
   body {
     background-color: #080915;
     color: #f8fafc;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-family: 'General Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     min-height: 100vh;
   }
 }
