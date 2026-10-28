@@ -513,12 +513,12 @@ export default function App() {
 
         {/* NOTICE / DISCLAIMER BANNER */}
         <section className="mt-6" aria-label="Pemberitahuan Hak Cipta & Akses">
-          <div className="glass-surface p-3.5 rounded-2xl border border-rose-500/20 bg-gradient-to-r from-rose-950/20 via-purple-950/20 to-black/30 flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-rose-500/15 text-rose-300 border border-rose-500/30 flex-shrink-0">
-              <ShieldCheck className="w-5 h-5 text-rose-300" />
-            </div>
-            <p className="text-xs text-slate-300/90 leading-relaxed pt-0.5">
-              Semua dokumen tersimpan di <strong>Google Drive Resmi SEMA Amikom Purwokerto</strong> dengan hak akses <em>Read-Only</em> untuk seluruh civitas akademika.
+          <div className="flex items-start gap-2.5 rounded-lg border-l-[3px] border-rose-400/70 bg-rose-500/[0.07] py-3 pl-3.5 pr-3">
+            <ShieldCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-rose-300" />
+            <p className="text-[11px] leading-relaxed text-slate-300/85">
+              Semua dokumen tersimpan di{' '}
+              <strong className="font-semibold text-white/90">Google Drive Resmi SEMA Amikom Purwokerto</strong> dengan
+              hak akses <em>Read-Only</em> untuk seluruh civitas akademika.
             </p>
           </div>
         </section>
