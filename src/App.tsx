@@ -180,7 +180,7 @@ export default function App() {
         <section className="mt-7 space-y-3" aria-label="Media resmi Senat Mahasiswa">
           <div className="flex items-center px-1">
             <span className="text-[11px] uppercase tracking-wider font-bold text-slate-300 flex items-center gap-1.5">
-              <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
+              <PhoneCall className="w-3.5 h-3.5 text-purple-300" />
               Media resmi Senat Mahasiswa
             </span>
           </div>
@@ -203,10 +203,10 @@ export default function App() {
                   />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
+                  <div className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
                     SEMA Amikom
                   </div>
-                  <div className="text-[10px] text-emerald-400 font-sans truncate">
+                  <div className="text-[10px] text-purple-300 font-sans truncate">
                     wa.me/628212649382
                   </div>
                 </div>
@@ -231,10 +231,10 @@ export default function App() {
                   />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
+                  <div className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
                     Narahubung (Lifa)
                   </div>
-                  <div className="text-[10px] text-emerald-400 font-sans truncate">
+                  <div className="text-[10px] text-purple-300 font-sans truncate">
                     wa.me/6288228951004
                   </div>
                 </div>
@@ -257,10 +257,10 @@ export default function App() {
                   />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
+                  <div className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
                     Gmail SEMA
                   </div>
-                  <div className="text-[10px] text-emerald-400 font-sans truncate">
+                  <div className="text-[10px] text-purple-300 font-sans truncate">
                     semamikompwt@gmail.com
                   </div>
                 </div>
@@ -285,10 +285,10 @@ export default function App() {
                   />
                 </span>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
+                  <div className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors truncate">
                     Instagram SEMA
                   </div>
-                  <div className="text-[10px] text-emerald-400 font-sans truncate">
+                  <div className="text-[10px] text-purple-300 font-sans truncate">
                     @sema.amikompwt
                   </div>
                 </div>
