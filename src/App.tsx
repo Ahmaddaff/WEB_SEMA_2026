@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   Search,
   X,
@@ -15,7 +15,8 @@ import {
   Check,
   Download,
   FileSpreadsheet,
-  PhoneCall
+  PhoneCall,
+  ArrowUp
 } from 'lucide-react';
 import { DOCUMENT_CATEGORIES, LegalDocument } from './data/documentsData';
 import { filterDocuments, normalizeText } from './utils/documentSearch';
@@ -54,6 +55,50 @@ export default function App() {
   const [activeModalDoc, setActiveModalDoc] = useState<LegalDocument | null>(null);
   const [isCopiedToast, setIsCopiedToast] = useState(false);
   const [copiedContactToast, setCopiedContactToast] = useState<string | null>(null);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Tombol "kembali ke atas" muncul setelah menggulir cukup jauh
+  useEffect(() => {
+    const onScroll = () => setShowBackToTop(window.scrollY > 480);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Pintasan papan tombol: "/" fokus ke pencarian, "Esc" bersihkan/tutup
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const typing =
+        !!target &&
+        (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+
+      if (e.key === '/' && !typing) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        searchInputRef.current?.select();
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        if (activeModalDoc) {
+          setActiveModalDoc(null);
+        } else if (searchQuery) {
+          setSearchQuery('');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [activeModalDoc, searchQuery]);
+
+  // Statistik ringkas untuk footer
+  const libraryStats = useMemo(() => {
+    const documents = DOCUMENT_CATEGORIES.reduce((sum, cat) => sum + cat.documents.length, 0);
+    return { documents, categories: DOCUMENT_CATEGORIES.length };
+  }, []);
 
   // Category filter chips (includes new category 8)
   const categoryPills = [
@@ -127,7 +172,7 @@ export default function App() {
       </div>
 
       {/* Main Content Container - Mobile First (Max 580px width) */}
-      <div className="relative z-10 max-w-xl mx-auto px-4 pt-8 md:pt-12 sm:px-6">
+      <div className="relative z-10 max-w-xl mx-auto px-4 pt-8 md:pt-12 sm:px-6 page-enter">
 
         {/* HEADER / PROFILE SECTION */}
         <header className="flex flex-col items-center text-center">
@@ -313,12 +358,17 @@ export default function App() {
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none" />
               <input
                 id="search-input"
+                ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari produk hukum, SK, atau regulasi..."
+                aria-describedby="search-hint"
                 className="w-full pl-10 pr-9 py-2.5 bg-black/30 rounded-xl text-xs sm:text-sm text-white placeholder-slate-400 border border-white/10 focus:outline-none focus:border-purple-400/60 focus:ring-2 focus:ring-purple-500/20 transition-all"
               />
+              <span id="search-hint" className="sr-only">
+                Tekan garis miring untuk langsung fokus ke kolom pencarian, Escape untuk menghapus kata kunci.
+              </span>
               {searchQuery && (
                 <button
                   type="button"
@@ -328,6 +378,14 @@ export default function App() {
                 >
                   <X className="w-4 h-4" />
                 </button>
+              )}
+              {!searchQuery && (
+                <kbd
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-2.5 hidden h-5 min-w-[1.35rem] items-center justify-center rounded-md border border-white/15 bg-white/5 px-1 text-[10px] font-semibold text-slate-400 sm:inline-flex"
+                >
+                  /
+                </kbd>
               )}
             </div>
 
@@ -356,7 +414,7 @@ export default function App() {
             {/* Search feedback counter */}
             {(searchQuery.trim() || selectedCategory !== 'SEMUA') && (
               <div className="flex items-center justify-between px-1 pt-2 text-[11px] text-slate-400 border-t border-white/5 mt-2">
-                <span>
+                <span aria-live="polite">
                   Hasil:{' '}
                   <strong className="text-purple-300">{totalMatches}</strong> dokumen ditemukan
                 </span>
@@ -525,6 +583,17 @@ export default function App() {
 
         {/* FOOTER */}
         <footer className="mt-10 text-center space-y-1.5 border-t border-white/5 pt-6 text-[11px] text-slate-400">
+          <div className="mb-3 flex items-center justify-center gap-2 text-[10px] font-medium tracking-wide text-slate-400">
+            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1">
+              {libraryStats.documents} dokumen
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1">
+              {libraryStats.categories} kategori
+            </span>
+            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1">
+              Akses Read-Only
+            </span>
+          </div>
           <p className="font-semibold text-slate-300">
             &copy; 2026 Senat Mahasiswa Universitas Amikom Purwokerto. All Rights Reserved.
           </p>
@@ -533,6 +602,18 @@ export default function App() {
           </p>
         </footer>
       </div>
+
+      {/* BACK TO TOP */}
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Kembali ke atas halaman"
+        className={`fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#151731]/90 text-slate-200 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.9)] backdrop-blur-xl transition-all duration-300 hover:border-purple-400/50 hover:text-white hover:shadow-[0_10px_30px_-6px_rgba(139,92,246,0.5)] ${
+          showBackToTop ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
+        }`}
+      >
+        <ArrowUp className="h-4 w-4" />
+      </button>
 
       {/* DOCUMENT PREVIEW MODAL */}
       {activeModalDoc && (

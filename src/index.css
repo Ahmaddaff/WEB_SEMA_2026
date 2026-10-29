@@ -364,3 +364,52 @@ details[open] {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+/* ============================================================
+   POLESAN AKHIR
+   ============================================================ */
+
+/* Deretan pill filter: tanpa scrollbar horizontal yang mengganggu */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gulir halus saat menekan tombol "ke atas" */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Cincin fokus keyboard yang jelas (aksesibilitas) */
+:focus-visible {
+  outline: 2px solid rgba(196, 181, 253, 0.9);
+  outline-offset: 2px;
+}
+
+/* Transisi masuk halaman (hanya opacity, aman untuk elemen sticky) */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-enter {
+  animation: pageFadeIn 0.45s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-enter {
+    animation: none;
+  }
+}

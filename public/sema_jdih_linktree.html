@@ -367,6 +367,31 @@
       align-items: center;
     }
 
+    /* Petunjuk pintasan keyboard di ujung kanan kolom pencarian */
+    .search-kbd {
+      position: absolute;
+      right: 0.65rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.35rem;
+      height: 1.25rem;
+      padding: 0 0.25rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+      font-size: 0.62rem;
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    @media (min-width: 640px) {
+      .search-kbd {
+        display: inline-flex;
+      }
+    }
+
     .search-input-box input {
       width: 100%;
       padding: 0.65rem 2.25rem 0.65rem 2.5rem;
@@ -503,12 +528,65 @@
       flex-shrink: 0;
     }
 
+    /* ===== POLESAN AKHIR ===== */
+
+    /* Gulir halus untuk tombol "ke atas" */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Cincin fokus keyboard yang jelas */
+    :focus-visible {
+      outline: 2px solid rgba(196, 181, 253, 0.9);
+      outline-offset: 2px;
+    }
+
+    /* Tombol kembali ke atas */
+    .back-to-top {
+      position: fixed;
+      right: 1.15rem;
+      bottom: 1.15rem;
+      z-index: 40;
+      width: 2.6rem;
+      height: 2.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(21, 23, 49, 0.92);
+      color: #e2e8f0;
+      cursor: pointer;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.9);
+      opacity: 0;
+      transform: translateY(0.75rem);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-to-top:hover {
+      border-color: rgba(168, 85, 247, 0.55);
+      color: #fff;
+      box-shadow: 0 10px 30px -6px rgba(139, 92, 246, 0.5);
+    }
+
     /* Hormati preferensi pengguna yang mengurangi gerakan */
     @media (prefers-reduced-motion: reduce) {
       .logo-aura,
       .logo-img,
       .orb {
         animation: none !important;
+      }
+
+      html {
+        scroll-behavior: auto;
       }
     }
 
@@ -690,6 +768,7 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
         <input type="text" id="searchInput" placeholder="Cari produk hukum, SK, atau regulasi..." oninput="handleSearch()">
+        <kbd class="search-kbd" aria-hidden="true">/</kbd>
       </div>
 
       <div class="pills-container">
@@ -1159,6 +1238,14 @@
     </footer>
   </div>
 
+  <!-- KEMBALI KE ATAS -->
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Kembali ke atas halaman">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
   <!-- REAL-TIME JAVASCRIPT SEARCH & FILTERING LOGIC -->
   <script>
     let activeFilter = 'all';
@@ -1173,6 +1260,10 @@
     function handleSearch() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
       const groups = document.querySelectorAll('.category-group');
+
+      // Sembunyikan petunjuk "/" saat kolom sudah berisi
+      const kbd = document.querySelector('.search-kbd');
+      if (kbd) kbd.style.opacity = query ? '0' : '1';
 
       groups.forEach(group => {
         const cat = group.getAttribute('data-category');
@@ -1211,6 +1302,42 @@
         }
       });
     }
+
+    // Tombol kembali ke atas
+    (function () {
+      var btn = document.getElementById('backToTop');
+      if (!btn) return;
+
+      var onScroll = function () {
+        btn.classList.toggle('is-visible', window.scrollY > 480);
+      };
+
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
+    // Pintasan "/" untuk fokus pencarian, "Esc" untuk mengosongkannya
+    (function () {
+      var input = document.getElementById('searchInput');
+      if (!input) return;
+
+      window.addEventListener('keydown', function (e) {
+        var el = e.target;
+        var typing = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+
+        if (e.key === '/' && !typing) {
+          e.preventDefault();
+          input.focus();
+          input.select();
+        } else if (e.key === 'Escape' && input.value) {
+          input.value = '';
+          handleSearch();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
