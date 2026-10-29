@@ -161,14 +161,25 @@ export default function App() {
 
     const flight = from.animate(
       [
-        { transform: 'translate(0px, 0px) scale(1)' },
-        { transform: `translate(${dx}px, ${dy}px) scale(${scale})` },
+        {
+          transform: 'translate(0px, 0px) scale(1)',
+          easing: 'cubic-bezier(0.42, 0.02, 0.62, 0.98)',
+          offset: 0,
+        },
+        {
+          // Sedikit melampaui ukuran target sebelum mengendap, supaya
+          // terasa punya bobot dan tidak berhenti mendadak.
+          transform: `translate(${dx * 0.985}px, ${dy * 0.985}px) scale(${scale * 1.025})`,
+          easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
+          offset: 0.78,
+        },
+        {
+          transform: `translate(${dx}px, ${dy}px) scale(${scale})`,
+          offset: 1,
+        },
       ],
       {
         duration: PRELOADER_FLY_MS,
-        // ease-in-out: mulai pelan, melaju, lalu mendarat halus —
-        // terasa seperti "ditarik" bukan melompat.
-        easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
         fill: 'forwards',
       }
     );
@@ -367,18 +378,29 @@ export default function App() {
 
         {/* HEADER / PROFILE SECTION */}
         <header className="flex flex-col items-center text-center">
-          {/* Logo with Liquid Glass Aura Ring — seluruh grup disembunyikan
-              selama preloader, lalu muncul tepat saat emblem mendarat. */}
-          <div className={`relative group mb-5 ${booting ? 'invisible' : 'visible'}`}>
-            {/* Rotating conic aura ring */}
-            <div className="absolute -inset-3 rounded-full bg-[conic-gradient(from_0deg,#a855f7,#6366f1,#22d3ee,#a855f7)] opacity-50 blur-lg animate-aura-spin transition-opacity duration-500 group-hover:opacity-80" />
-            {/* Soft ambient glow */}
-            <div className="absolute -inset-7 rounded-full bg-purple-500/25 blur-2xl animate-pulse-glow" />
+          {/* Logo with Liquid Glass Aura Ring.
+              Frame-nya disembunyikan selama preloader; aura & glow baru
+              menyala lembut setelah emblem mendarat, supaya tidak "ngepop". */}
+          <div className="relative group mb-5">
+            {/* Aura & glow: memudar masuk setelah emblem tiba */}
+            <div
+              className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out motion-reduce:transition-none ${
+                booting ? 'opacity-0' : 'opacity-100'
+              }`}
+              aria-hidden="true"
+            >
+              {/* Rotating conic aura ring */}
+              <div className="absolute -inset-3 rounded-full bg-[conic-gradient(from_0deg,#a855f7,#6366f1,#22d3ee,#a855f7)] opacity-50 blur-lg animate-aura-spin transition-opacity duration-500 group-hover:opacity-80" />
+              {/* Soft ambient glow */}
+              <div className="absolute -inset-7 rounded-full bg-purple-500/25 blur-2xl animate-pulse-glow" />
+            </div>
 
             {/* Glass Border & Frame */}
             <div
               ref={headerLogoRef}
-              className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2.5 glass-surface border border-white/35 shadow-[0_22px_55px_-18px_rgba(139,92,246,0.75)] flex items-center justify-center overflow-hidden"
+              className={`relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2.5 glass-surface border border-white/35 shadow-[0_22px_55px_-18px_rgba(139,92,246,0.75)] flex items-center justify-center overflow-hidden ${
+                booting ? 'invisible' : 'visible'
+              }`}
             >
               {/* Inner hairline ring */}
               <div className="pointer-events-none absolute inset-1.5 rounded-full border border-white/15" />

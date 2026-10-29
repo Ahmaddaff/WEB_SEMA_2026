@@ -236,6 +236,7 @@
       filter: blur(14px);
       opacity: 0.5;
       pointer-events: none;
+      transition: opacity 0.5s ease-out;
       animation: auraSpin 16s linear infinite;
     }
 
@@ -602,10 +603,21 @@
       background: #080915;
     }
 
-    /* Selama layar pembuka aktif, logo di header disembunyikan.
-       Emblem yang terbang akan mendarat tepat di posisinya. */
-    body.is-booting .logo-container {
+    /* Selama layar pembuka aktif, frame logo di header disembunyikan
+       dan auranya dipadamkan. Emblem yang terbang mendarat tepat di
+       posisinya, lalu aura menyala lembut supaya tidak "ngepop". */
+    body.is-booting .logo-wrapper {
       visibility: hidden;
+    }
+
+    body.is-booting .logo-aura {
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .logo-aura {
+        transition: none;
+      }
     }
 
     .preloader__glow {
@@ -716,18 +728,33 @@
       box-shadow: 0 0 14px 4px rgba(168, 85, 247, 0.85);
     }
 
+    /* Cangkang kaca berisi emblem.
+       Sengaja dibuat identik dengan frame logo di header supaya saat
+       emblem mendarat dan dilepas, pergantiannya tidak terlihat. */
     .preloader__logo {
       position: relative;
       width: 116px;
       height: 116px;
       border-radius: 9999px;
-      padding: 8px;
+      padding: 10px;
       display: grid;
       place-items: center;
-      background: linear-gradient(160deg, rgba(32, 35, 62, 0.96), rgba(12, 14, 28, 0.99));
-      border: 1px solid rgba(255, 255, 255, 0.26);
-      box-shadow: 0 22px 55px -18px rgba(139, 92, 246, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      background: rgba(18, 20, 36, 0.65);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 22px 55px -18px rgba(139, 92, 246, 0.75), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
       animation: preloaderFloat 3.4s ease-in-out infinite;
+    }
+
+    /* Garis rambut dalam, sama seperti pada frame header */
+    .preloader__logo::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      pointer-events: none;
     }
 
     .preloader__logo-img {
@@ -1794,12 +1821,26 @@
 
         from.animate(
           [
-            { transform: 'translate(0px, 0px) scale(1)' },
-            { transform: 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scale + ')' }
+            {
+              transform: 'translate(0px, 0px) scale(1)',
+              easing: 'cubic-bezier(0.42, 0.02, 0.62, 0.98)',
+              offset: 0
+            },
+            {
+              // Sedikit melampaui ukuran target sebelum mengendap,
+              // supaya terasa punya bobot dan tidak berhenti mendadak.
+              transform:
+                'translate(' + dx * 0.985 + 'px, ' + dy * 0.985 + 'px) scale(' + scale * 1.025 + ')',
+              easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
+              offset: 0.78
+            },
+            {
+              transform: 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scale + ')',
+              offset: 1
+            }
           ],
           {
             duration: FLY_MS,
-            easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
             fill: 'forwards'
           }
         );
