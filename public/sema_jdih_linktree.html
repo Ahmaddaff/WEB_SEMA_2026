@@ -577,12 +577,343 @@
       box-shadow: 0 10px 30px -6px rgba(139, 92, 246, 0.5);
     }
 
+    /* ============================================================
+       PRELOADER — layar pembuka dengan logo SEMA
+       ============================================================ */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.1rem;
+      background: #080915;
+      overflow: hidden;
+      will-change: opacity;
+    }
+
+    .preloader__glow {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    .preloader__glow--a {
+      width: 320px;
+      height: 320px;
+      top: -90px;
+      left: -70px;
+      background: rgba(124, 58, 237, 0.34);
+      animation: preloaderPulse 6.5s ease-in-out infinite;
+    }
+
+    .preloader__glow--b {
+      width: 300px;
+      height: 300px;
+      bottom: -80px;
+      right: -60px;
+      background: rgba(34, 211, 238, 0.2);
+      animation: preloaderPulse 7.5s ease-in-out infinite reverse;
+    }
+
+    .preloader__stage {
+      position: relative;
+      width: 172px;
+      height: 172px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .preloader__stage::before {
+      content: '';
+      position: absolute;
+      inset: -46px;
+      border-radius: 9999px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
+      pointer-events: none;
+    }
+
+    .preloader__arc {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      overflow: visible;
+    }
+
+    .preloader__arc-track {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.07);
+      stroke-width: 2;
+    }
+
+    .preloader__arc-fill {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.9));
+    }
+
+    .preloader__aura {
+      position: absolute;
+      inset: 16px;
+      border-radius: 9999px;
+      background: conic-gradient(from 0deg, #a855f7, #6366f1, #22d3ee, #a855f7);
+      filter: blur(15px);
+      opacity: 0.55;
+      animation: preloaderAura 5s linear infinite;
+    }
+
+    .preloader__ping {
+      position: absolute;
+      inset: 28px;
+      border-radius: 9999px;
+      border: 1px solid rgba(196, 181, 253, 0.4);
+      pointer-events: none;
+      animation: preloaderPing 2.9s ease-out infinite;
+    }
+
+    .preloader__ping--delay {
+      animation-delay: 1.45s;
+    }
+
+    .preloader__orbit {
+      position: absolute;
+      inset: -7px;
+      border-radius: 9999px;
+      border: 1px dashed rgba(196, 181, 253, 0.22);
+      animation: preloaderOrbit 8s linear infinite;
+    }
+
+    .preloader__orbit-dot {
+      position: absolute;
+      top: -3.5px;
+      left: 50%;
+      width: 7px;
+      height: 7px;
+      margin-left: -3.5px;
+      border-radius: 9999px;
+      background: #ede9fe;
+      box-shadow: 0 0 14px 4px rgba(168, 85, 247, 0.85);
+    }
+
+    .preloader__logo {
+      position: relative;
+      width: 116px;
+      height: 116px;
+      border-radius: 9999px;
+      padding: 8px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(160deg, rgba(32, 35, 62, 0.96), rgba(12, 14, 28, 0.99));
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      box-shadow: 0 22px 55px -18px rgba(139, 92, 246, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      animation: preloaderFloat 3.4s ease-in-out infinite;
+    }
+
+    .preloader__logo-img {
+      width: 100%;
+      height: 100%;
+      background-image: url('/assets/aistudio/Logo_Sema_HD_ef634b2e.png');
+      background-size: 94%;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: preloaderBreath 2.6s ease-in-out infinite;
+    }
+
+    .preloader__meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preloader__wordmark {
+      display: flex;
+      gap: 0.16em;
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.26em;
+      text-indent: 0.26em;
+      color: #f8fafc;
+    }
+
+    .preloader__wordmark span {
+      display: inline-block;
+      opacity: 0;
+      animation: preloaderRise 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .preloader__sub {
+      margin: 0.6rem 0 0;
+      max-width: 16rem;
+      text-align: center;
+      font-size: 0.6rem;
+      line-height: 1.7;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      opacity: 0;
+      animation: preloaderRise 0.7s ease-out 0.5s both;
+    }
+
+    .preloader__bar {
+      position: relative;
+      margin-top: 1.2rem;
+      width: 8.75rem;
+      height: 3px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      opacity: 0;
+      animation: preloaderRise 0.6s ease-out 0.65s both;
+    }
+
+    .preloader__bar-fill {
+      position: relative;
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #a855f7, #6366f1, #22d3ee);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.8);
+      overflow: hidden;
+    }
+
+    .preloader__bar-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+      animation: preloaderShimmer 1.25s ease-in-out infinite;
+    }
+
+    .preloader__pct {
+      margin: 0.62rem 0 0;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: #64748b;
+      font-variant-numeric: tabular-nums;
+      opacity: 0;
+      animation: preloaderRise 0.6s ease-out 0.75s both;
+    }
+
+    .preloader.is-exiting {
+      pointer-events: none;
+      animation: preloaderFadeOut 0.64s ease-out forwards;
+    }
+
+    .preloader.is-exiting .preloader__stage {
+      animation: preloaderStageOut 0.64s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+
+    .preloader.is-exiting .preloader__meta {
+      animation: preloaderMetaOut 0.46s ease-out forwards;
+    }
+
+    @keyframes preloaderAura {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes preloaderPing {
+      0% { transform: scale(0.8); opacity: 0; }
+      22% { opacity: 0.5; }
+      100% { transform: scale(1.32); opacity: 0; }
+    }
+
+    @keyframes preloaderOrbit {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes preloaderFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes preloaderBreath {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes preloaderPulse {
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.12); }
+    }
+
+    @keyframes preloaderRise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes preloaderShimmer {
+      from { transform: translateX(-110%); }
+      to { transform: translateX(210%); }
+    }
+
+    @keyframes preloaderFadeOut {
+      0%, 50% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes preloaderStageOut {
+      0% { scale: 1; opacity: 1; }
+      100% { scale: 1.4; opacity: 0; }
+    }
+
+    @keyframes preloaderMetaOut {
+      0% { opacity: 1; translate: 0 0; }
+      100% { opacity: 0; translate: 0 12px; }
+    }
+
+    /* Di layar lebar, perbesar seluruh komposisi */
+    @media (min-width: 640px) {
+      .preloader {
+        gap: 3.6rem;
+      }
+
+      .preloader__stage {
+        transform: scale(1.3);
+      }
+
+      .preloader__meta {
+        transform: scale(1.16);
+      }
+    }
+
     /* Hormati preferensi pengguna yang mengurangi gerakan */
     @media (prefers-reduced-motion: reduce) {
       .logo-aura,
       .logo-img,
       .orb {
         animation: none !important;
+      }
+
+      .preloader,
+      .preloader__aura,
+      .preloader__orbit,
+      .preloader__ping,
+      .preloader__logo,
+      .preloader__logo-img,
+      .preloader__glow--a,
+      .preloader__glow--b,
+      .preloader__wordmark span,
+      .preloader__sub,
+      .preloader__bar,
+      .preloader__pct,
+      .preloader__bar-fill::after {
+        animation: none !important;
+      }
+
+      .preloader__wordmark span,
+      .preloader__sub,
+      .preloader__bar,
+      .preloader__pct {
+        opacity: 1;
       }
 
       html {
@@ -664,6 +995,52 @@
   </style>
 </head>
 <body>
+
+  <!-- ============ LAYAR PEMBUKA ============ -->
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Memuat halaman JDIH Senat Mahasiswa">
+    <div class="preloader__glow preloader__glow--a" aria-hidden="true"></div>
+    <div class="preloader__glow preloader__glow--b" aria-hidden="true"></div>
+
+    <div class="preloader__stage">
+      <svg class="preloader__arc" viewBox="0 0 168 168" aria-hidden="true">
+        <defs>
+          <linearGradient id="preloaderArcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#a855f7"></stop>
+            <stop offset="50%" stop-color="#6366f1"></stop>
+            <stop offset="100%" stop-color="#22d3ee"></stop>
+          </linearGradient>
+        </defs>
+        <circle class="preloader__arc-track" cx="84" cy="84" r="78"></circle>
+        <circle class="preloader__arc-fill" id="preloaderArc" cx="84" cy="84" r="78"
+          stroke="url(#preloaderArcGrad)" stroke-dasharray="490.09" stroke-dashoffset="490.09"></circle>
+      </svg>
+
+      <div class="preloader__aura" aria-hidden="true"></div>
+      <div class="preloader__ping" aria-hidden="true"></div>
+      <div class="preloader__ping preloader__ping--delay" aria-hidden="true"></div>
+      <div class="preloader__orbit" aria-hidden="true">
+        <span class="preloader__orbit-dot"></span>
+      </div>
+
+      <div class="preloader__logo">
+        <div class="preloader__logo-img" role="img" aria-label="Logo Senat Mahasiswa Universitas Amikom Purwokerto"></div>
+      </div>
+    </div>
+
+    <div class="preloader__meta">
+      <p class="preloader__wordmark" aria-hidden="true">
+        <span style="animation-delay: 0.22s;">J</span>
+        <span style="animation-delay: 0.30s;">D</span>
+        <span style="animation-delay: 0.38s;">I</span>
+        <span style="animation-delay: 0.46s;">H</span>
+      </p>
+      <p class="preloader__sub">Senat Mahasiswa Universitas Amikom Purwokerto</p>
+      <div class="preloader__bar" aria-hidden="true">
+        <span class="preloader__bar-fill" id="preloaderBar"></span>
+      </div>
+      <p class="preloader__pct" id="preloaderPct" aria-hidden="true">0%</p>
+    </div>
+  </div>
 
   <!-- FLUID LIQUID BACKGROUND -->
   <div class="liquid-background">
@@ -1337,6 +1714,56 @@
           handleSearch();
         }
       });
+    })();
+
+    // Layar pembuka: progres 0 -> 100 lalu tutup
+    (function () {
+      var preloader = document.getElementById('preloader');
+      if (!preloader) return;
+
+      var arc = document.getElementById('preloaderArc');
+      var bar = document.getElementById('preloaderBar');
+      var pct = document.getElementById('preloaderPct');
+
+      var ARC = 2 * Math.PI * 78;
+      var DURATION = 1600;
+      var EXIT_MS = 640;
+
+      // Hormati preferensi minim gerakan: lewati saja
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        preloader.parentNode.removeChild(preloader);
+        return;
+      }
+
+      document.body.style.overflow = 'hidden';
+
+      var start = performance.now();
+
+      var render = function (value) {
+        if (arc) arc.setAttribute('stroke-dashoffset', String(ARC - (ARC * value) / 100));
+        if (bar) bar.style.width = value + '%';
+        if (pct) pct.textContent = Math.round(value) + '%';
+      };
+
+      var tick = function (now) {
+        var t = Math.min(1, (now - start) / DURATION);
+        render((1 - Math.pow(1 - t, 3)) * 100);
+
+        if (t < 1) {
+          requestAnimationFrame(tick);
+          return;
+        }
+
+        setTimeout(function () {
+          preloader.classList.add('is-exiting');
+          setTimeout(function () {
+            document.body.style.overflow = '';
+            if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+          }, EXIT_MS);
+        }, 170);
+      };
+
+      requestAnimationFrame(tick);
     })();
   </script>
 </body>

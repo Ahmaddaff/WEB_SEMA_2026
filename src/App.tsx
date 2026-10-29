@@ -49,6 +49,18 @@ const CATEGORY_LOGOS: Record<string, string> = {
   'sk-ketua-umum-sema': BRAND_ASSETS.semaHd,
 };
 
+/**
+ * Keliling cincin progres preloader (r = 78 pada viewBox 168x168).
+ * Dipakai untuk menghitung stroke-dashoffset dari persentase.
+ */
+const PRELOADER_ARC = 2 * Math.PI * 78;
+
+/** Durasi tampil preloader sebelum mulai menutup (ms). */
+const PRELOADER_DURATION = 1600;
+
+/** Lama animasi keluar; harus selaras dengan durasi di index.css. */
+const PRELOADER_EXIT_MS = 640;
+
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('SEMUA');
@@ -57,6 +69,61 @@ export default function App() {
   const [copiedContactToast, setCopiedContactToast] = useState<string | null>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // ---- Layar pembuka (preloader) ----
+  const [booting, setBooting] = useState(true);
+  const [bootProgress, setBootProgress] = useState(0);
+  const [bootExiting, setBootExiting] = useState(false);
+
+  // Jalankan progres 0 -> 100 lalu tutup layar pembuka
+  useEffect(() => {
+    // Hormati preferensi minim gerakan: lewati saja
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setBootProgress(100);
+      setBooting(false);
+      return;
+    }
+
+    const start = performance.now();
+    let raf = 0;
+    let exitTimer = 0;
+    let doneTimer = 0;
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / PRELOADER_DURATION);
+      // ease-out cubic: cepat di awal, melambat menjelang akhir
+      const eased = 1 - Math.pow(1 - t, 3);
+      setBootProgress(eased * 100);
+
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+
+      exitTimer = window.setTimeout(() => {
+        setBootExiting(true);
+        doneTimer = window.setTimeout(() => setBooting(false), PRELOADER_EXIT_MS);
+      }, 170);
+    };
+
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(exitTimer);
+      window.clearTimeout(doneTimer);
+    };
+  }, []);
+
+  // Kunci gulir selama layar pembuka masih menutup halaman
+  useEffect(() => {
+    if (!booting) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [booting]);
 
   // Tombol "kembali ke atas" muncul setelah menggulir cukup jauh
   useEffect(() => {
@@ -156,7 +223,79 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#080915] text-slate-100 overflow-x-hidden pb-16 selection:bg-purple-500/30 selection:text-purple-200">
+    <>
+      {/* ============ LAYAR PEMBUKA ============ */}
+      {booting && (
+        <div
+          className={`preloader${bootExiting ? ' is-exiting' : ''}`}
+          role="status"
+          aria-live="polite"
+          aria-label="Memuat halaman JDIH Senat Mahasiswa"
+        >
+          <div className="preloader__glow preloader__glow--a" aria-hidden="true" />
+          <div className="preloader__glow preloader__glow--b" aria-hidden="true" />
+
+          <div className="preloader__stage">
+            {/* Cincin progres */}
+            <svg className="preloader__arc" viewBox="0 0 168 168" aria-hidden="true">
+              <defs>
+                <linearGradient id="preloaderArcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#a855f7" />
+                  <stop offset="50%" stopColor="#6366f1" />
+                  <stop offset="100%" stopColor="#22d3ee" />
+                </linearGradient>
+              </defs>
+              <circle className="preloader__arc-track" cx="84" cy="84" r="78" />
+              <circle
+                className="preloader__arc-fill"
+                cx="84"
+                cy="84"
+                r="78"
+                stroke="url(#preloaderArcGrad)"
+                strokeDasharray={PRELOADER_ARC}
+                strokeDashoffset={PRELOADER_ARC - (PRELOADER_ARC * bootProgress) / 100}
+              />
+            </svg>
+
+            {/* Aura berputar + satelit orbit */}
+            <div className="preloader__aura" aria-hidden="true" />
+            <div className="preloader__ping" aria-hidden="true" />
+            <div className="preloader__ping preloader__ping--delay" aria-hidden="true" />
+            <div className="preloader__orbit" aria-hidden="true">
+              <span className="preloader__orbit-dot" />
+            </div>
+
+            {/* Emblem SEMA */}
+            <div className="preloader__logo">
+              <div
+                className="preloader__logo-img"
+                style={{ backgroundImage: 'url(/assets/aistudio/Logo_Sema_HD_ef634b2e.png)' }}
+                role="img"
+                aria-label="Logo Senat Mahasiswa Universitas Amikom Purwokerto"
+              />
+            </div>
+          </div>
+
+          <div className="preloader__meta">
+            <p className="preloader__wordmark" aria-hidden="true">
+              {['J', 'D', 'I', 'H'].map((char, index) => (
+                <span key={char} style={{ animationDelay: `${0.22 + index * 0.08}s` }}>
+                  {char}
+                </span>
+              ))}
+            </p>
+            <p className="preloader__sub">Senat Mahasiswa Universitas Amikom Purwokerto</p>
+            <div className="preloader__bar" aria-hidden="true">
+              <span className="preloader__bar-fill" style={{ width: `${bootProgress}%` }} />
+            </div>
+            <p className="preloader__pct" aria-hidden="true">
+              {Math.round(bootProgress)}%
+            </p>
+          </div>
+        </div>
+      )}
+
+      <div className="relative min-h-screen w-full bg-[#080915] text-slate-100 overflow-x-hidden pb-16 selection:bg-purple-500/30 selection:text-purple-200">
       {/* Liquid Fluid Background Mesh & Glowing Ambient Orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute inset-0 animate-liquid-bg opacity-75" />
@@ -172,7 +311,7 @@ export default function App() {
       </div>
 
       {/* Main Content Container - Mobile First (Max 580px width) */}
-      <div className="relative z-10 max-w-xl mx-auto px-4 pt-8 md:pt-12 sm:px-6 page-enter">
+      <div className={`relative z-10 max-w-xl mx-auto px-4 pt-8 md:pt-12 sm:px-6 ${booting ? 'opacity-0' : 'page-enter'}`}>
 
         {/* HEADER / PROFILE SECTION */}
         <header className="flex flex-col items-center text-center">
@@ -746,6 +885,7 @@ export default function App() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
