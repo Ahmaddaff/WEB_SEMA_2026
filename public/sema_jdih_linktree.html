@@ -589,7 +589,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2.1rem;
+      gap: 2.5rem;
       background: transparent;
       overflow: hidden;
       will-change: opacity;
@@ -612,6 +612,12 @@
 
     body.is-booting .logo-aura {
       opacity: 0;
+    }
+
+    /* Denyut logo header ditahan supaya mulai dari skala 1 tepat saat
+       emblem yang terbang mendarat. */
+    body.is-booting .logo-img {
+      animation-play-state: paused;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -647,8 +653,8 @@
 
     .preloader__stage {
       position: relative;
-      width: 172px;
-      height: 172px;
+      width: 188px;
+      height: 188px;
       display: grid;
       place-items: center;
       flex-shrink: 0;
@@ -729,12 +735,13 @@
     }
 
     /* Cangkang kaca berisi emblem.
-       Sengaja dibuat identik dengan frame logo di header supaya saat
-       emblem mendarat dan dilepas, pergantiannya tidak terlihat. */
+       Ukuran, padding, dan border-nya sama persis dengan .logo-wrapper
+       di header, jadi berapa pun skala saat terbang, ketebalan cincin
+       dan ukuran emblem di dalamnya tetap identik. */
     .preloader__logo {
       position: relative;
-      width: 116px;
-      height: 116px;
+      width: 132px;
+      height: 132px;
       border-radius: 9999px;
       padding: 10px;
       display: grid;
@@ -764,7 +771,6 @@
       background-size: 94%;
       background-position: center;
       background-repeat: no-repeat;
-      animation: preloaderBreath 2.6s ease-in-out infinite;
     }
 
     .preloader__meta {
@@ -868,7 +874,7 @@
     }
 
     .preloader.is-exiting .preloader__logo {
-      animation: none;
+      animation-play-state: paused;
     }
 
     @keyframes preloaderAura {
@@ -888,11 +894,6 @@
     @keyframes preloaderFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
-    }
-
-    @keyframes preloaderBreath {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
     }
 
     @keyframes preloaderPulse {
@@ -927,7 +928,7 @@
     /* Di layar lebar, perbesar seluruh komposisi */
     @media (min-width: 640px) {
       .preloader {
-        gap: 3.6rem;
+        gap: 4rem;
       }
 
       .preloader__stage {
@@ -1823,10 +1824,22 @@
         var dy = (b.top + b.height / 2 - (a.top + a.height / 2)) / parentScale;
         var scale = a.width ? b.width / a.width : 1;
 
+        // Offset apungan yang sedang dibekukan (lihat index.css). Dipakai
+        // sebagai titik awal supaya emblem tidak melompat turun sebelum
+        // benar-benar mulai terbang.
+        var fx = 0;
+        var fy = 0;
+        var frozen = getComputedStyle(from).transform;
+        if (frozen && frozen !== 'none') {
+          var m = new DOMMatrixReadOnly(frozen);
+          fx = m.m41;
+          fy = m.m42;
+        }
+
         from.animate(
           [
             {
-              transform: 'translate(0px, 0px) scale(1)',
+              transform: 'translate(' + fx + 'px, ' + fy + 'px) scale(1)',
               easing: 'cubic-bezier(0.42, 0.02, 0.62, 0.98)',
               offset: 0
             },
@@ -1834,12 +1847,13 @@
               // Sedikit melampaui ukuran target sebelum mengendap,
               // supaya terasa punya bobot dan tidak berhenti mendadak.
               transform:
-                'translate(' + dx * 0.985 + 'px, ' + dy * 0.985 + 'px) scale(' + scale * 1.025 + ')',
+                'translate(' + (fx + dx * 0.985) + 'px, ' + (fy + dy * 0.985) + 'px) scale(' +
+                scale * 1.025 + ')',
               easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
               offset: 0.78
             },
             {
-              transform: 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scale + ')',
+              transform: 'translate(' + (fx + dx) + 'px, ' + (fy + dy) + 'px) scale(' + scale + ')',
               offset: 1
             }
           ],

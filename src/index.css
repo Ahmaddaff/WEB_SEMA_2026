@@ -428,7 +428,7 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.1rem;
+  gap: 2.5rem;
   background: transparent;
   overflow: hidden;
   will-change: opacity;
@@ -471,8 +471,8 @@ html {
 /* Panggung logo: SVG cincin + aura + orbit + emblem */
 .preloader__stage {
   position: relative;
-  width: 172px;
-  height: 172px;
+  width: 184px;
+  height: 184px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -557,13 +557,14 @@ html {
 }
 
 /* Cangkang kaca berisi emblem.
-   Sengaja dibuat identik dengan frame logo di header (glass-surface,
-   border 35%, shadow yang sama) supaya saat emblem mendarat dan
-   dilepas, pergantiannya tidak terlihat sama sekali. */
+   Ukuran, padding, dan border-nya SENGAJA sama persis dengan frame logo
+   di header (w-32 / sm:w-36, p-2.5, border 1px). Karena itu, berapa pun
+   skala saat terbang, ketebalan cincin dan ukuran emblem di dalamnya
+   tetap identik — jadi saat emblem mendarat tidak ada "pop" ukuran. */
 .preloader__logo {
   position: relative;
-  width: 116px;
-  height: 116px;
+  width: 128px;
+  height: 128px;
   border-radius: 9999px;
   padding: 10px;
   display: grid;
@@ -587,13 +588,17 @@ html {
   pointer-events: none;
 }
 
+/* Emblem di dalam cangkang.
+   Sengaja TANPA animasi "bernafas": logo di header berdenyut dengan
+   fase yang tidak bisa disamakan, dan kalau keduanya berdenyut sendiri-
+   sendiri ukurannya bisa berbeda sampai 5% tepat saat pergantian.
+   Gerak halus di sini sudah cukup dari aura, orbit, riak, dan apungan. */
 .preloader__logo-img {
   width: 100%;
   height: 100%;
   background-size: 94%;
   background-position: center;
   background-repeat: no-repeat;
-  animation: preloaderBreath 2.6s ease-in-out infinite;
 }
 
 /* Blok teks + progres */
@@ -699,10 +704,11 @@ html {
   animation: preloaderFadeFast 0.28s ease-out forwards;
 }
 
-/* Animasi mengambang dimatikan agar tidak berebut properti transform
-   dengan animasi terbang. */
+/* Animasi mengambang DIBEKUKAN (bukan dimatikan) supaya posisi emblem
+   tidak melompat turun tepat sebelum terbang. App.tsx membaca offset
+   beku ini dan memakainya sebagai titik awal animasi terbang. */
 .preloader.is-exiting .preloader__logo {
-  animation: none;
+  animation-play-state: paused;
 }
 
 @keyframes preloaderAura {
@@ -738,16 +744,6 @@ html {
   }
   50% {
     transform: translateY(-6px);
-  }
-}
-
-@keyframes preloaderBreath {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
   }
 }
 
@@ -814,7 +810,13 @@ html {
    dengan animasi keluar yang juga memakai properti tersebut. */
 @media (min-width: 640px) {
   .preloader {
-    gap: 3.6rem;
+    gap: 4rem;
+  }
+
+  /* Ukuran cangkang mengikuti frame header (sm:w-36) */
+  .preloader__logo {
+    width: 144px;
+    height: 144px;
   }
 
   .preloader__stage {

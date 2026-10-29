@@ -157,24 +157,36 @@ export default function App() {
     const dy = (b.top + b.height / 2 - (a.top + a.height / 2)) / parentScale;
     const scale = a.width ? b.width / a.width : 1;
 
+    // Offset animasi mengambang yang sedang dibekukan (lihat index.css).
+    // Titik awal animasi memakai offset ini supaya emblem tidak melompat
+    // turun sedetik sebelum terbang.
+    let fx = 0;
+    let fy = 0;
+    const frozen = getComputedStyle(from).transform;
+    if (frozen && frozen !== 'none') {
+      const m = new DOMMatrixReadOnly(frozen);
+      fx = m.m41;
+      fy = m.m42;
+    }
+
     if (typeof from.animate !== 'function') return;
 
     const flight = from.animate(
       [
         {
-          transform: 'translate(0px, 0px) scale(1)',
+          transform: `translate(${fx}px, ${fy}px) scale(1)`,
           easing: 'cubic-bezier(0.42, 0.02, 0.62, 0.98)',
           offset: 0,
         },
         {
           // Sedikit melampaui ukuran target sebelum mengendap, supaya
           // terasa punya bobot dan tidak berhenti mendadak.
-          transform: `translate(${dx * 0.985}px, ${dy * 0.985}px) scale(${scale * 1.025})`,
+          transform: `translate(${fx + dx * 0.985}px, ${fy + dy * 0.985}px) scale(${scale * 1.025})`,
           easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
           offset: 0.78,
         },
         {
-          transform: `translate(${dx}px, ${dy}px) scale(${scale})`,
+          transform: `translate(${fx + dx}px, ${fy + dy}px) scale(${scale})`,
           offset: 1,
         },
       ],
@@ -411,6 +423,9 @@ export default function App() {
                   backgroundImage: `url(/assets/aistudio/Logo_Sema_HD_ef634b2e.png)`,
                   backgroundSize: '94%',
                   backgroundPosition: 'center',
+                  // Ditahan selama preloader supaya denyutnya mulai dari
+                  // skala 1 tepat saat emblem yang terbang mendarat.
+                  animationPlayState: booting ? 'paused' : 'running',
                 }}
                 role="img"
                 aria-label="Logo Senat Mahasiswa Universitas Amikom Purwokerto"
