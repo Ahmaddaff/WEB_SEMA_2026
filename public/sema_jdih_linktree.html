@@ -1220,7 +1220,7 @@
     <!-- ACCORDION SECTIONS (<details> & <summary>) -->
     <main id="documentList">
       <!-- 1. UNDANG-UNDANG DASAR -->
-      <details class="glass-surface category-group" data-category="uud" open>
+      <details class="glass-surface category-group" data-category="uud">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
             <span class="category-logo"><img src="/assets/brand/lembaga-kemahasiswaan.png" alt="Logo resmi Lembaga Kemahasiswaan" /></span>
@@ -1251,7 +1251,7 @@
       </details>
 
       <!-- 2. UNDANG-UNDANG TURUNAN -->
-      <details class="glass-surface category-group" data-category="uu-turunan" open>
+      <details class="glass-surface category-group" data-category="uu-turunan">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
             <span class="category-logo"><img src="/assets/brand/lembaga-kemahasiswaan.png" alt="Logo resmi Lembaga Kemahasiswaan" /></span>
@@ -1482,7 +1482,7 @@
       </details>
 
       <!-- 7. KEPUTUSAN SEMA -->
-      <details class="glass-surface category-group" data-category="sk-sema" open>
+      <details class="glass-surface category-group" data-category="sk-sema">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
             <span class="category-logo"><img src="/assets/brand/sema-hd.png" alt="Logo resmi SEMA HD" /></span>
@@ -1527,7 +1527,7 @@
       </details>
 
       <!-- 8. KEPUTUSAN KETUA UMUM SEMA (SK KETUM) -->
-      <details class="glass-surface category-group" data-category="sk-ketua-umum-sema" open>
+      <details class="glass-surface category-group" data-category="sk-ketua-umum-sema">
         <summary>
           <div style="display: flex; align-items: center; gap: 0.65rem;">
             <span class="category-logo"><img src="/assets/brand/sema-hd.png" alt="Logo resmi SEMA HD" /></span>
@@ -1727,8 +1727,12 @@
 
         if (groupHasMatch) {
           group.style.display = 'block';
+          // Pencarian membuka kategori yang cocok secara otomatis;
+          // begitu kata kunci dikosongkan, semua kembali tertutup rapi.
           if (query) {
             group.setAttribute('open', '');
+          } else {
+            group.removeAttribute('open');
           }
         } else {
           group.style.display = 'none';

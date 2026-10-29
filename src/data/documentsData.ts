@@ -22,6 +22,11 @@ export interface DocumentCategory {
   subtitle: string;
   iconName: 'book' | 'file-text' | 'sliders' | 'award' | 'users' | 'check-square' | 'shield' | 'stamp';
   accentColor: string;
+  /**
+   * Hanya dipakai untuk membuka kategori secara otomatis saat pencarian.
+   * Sengaja tidak diisi di data, supaya semua akordeon tertutup rapi
+   * ketika halaman pertama kali dibuka.
+   */
   defaultOpen?: boolean;
   documents: LegalDocument[];
 }
@@ -34,7 +39,6 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     subtitle: 'Konstitusi Tertinggi Lembaga Kemahasiswaan',
     iconName: 'book',
     accentColor: 'from-pink-500/20 to-rose-600/20 text-rose-300 border-rose-500/30',
-    defaultOpen: true,
     documents: [
       {
         id: 'uud-lk-2026',
@@ -60,7 +64,6 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     subtitle: 'Produk Legislasi Lembaga Kemahasiswaan',
     iconName: 'file-text',
     accentColor: 'from-purple-500/20 to-indigo-600/20 text-purple-300 border-purple-500/30',
-    defaultOpen: true,
     documents: [
       {
         id: 'uu-01-2026',
@@ -324,7 +327,6 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     subtitle: 'Keputusan Resmi Senat Mahasiswa',
     iconName: 'shield',
     accentColor: 'from-rose-500/20 to-pink-600/20 text-rose-300 border-rose-500/30',
-    defaultOpen: true,
     documents: [
       {
         id: 'sk-012-bso',
@@ -377,7 +379,6 @@ export const DOCUMENT_CATEGORIES: DocumentCategory[] = [
     subtitle: 'Keputusan Resmi Ketua Umum Senat Mahasiswa',
     iconName: 'stamp',
     accentColor: 'from-emerald-500/20 to-teal-600/20 text-emerald-300 border-emerald-500/30',
-    defaultOpen: true,
     documents: [
       {
         id: 'sk-ketum-092',
