@@ -59,7 +59,10 @@ const PRELOADER_ARC = 2 * Math.PI * 78;
 const PRELOADER_DURATION = 1600;
 
 /** Lama animasi keluar; harus selaras dengan durasi di index.css. */
-const PRELOADER_EXIT_MS = 640;
+const PRELOADER_EXIT_MS = 760;
+
+/** Lama emblem terbang dari tengah layar ke logo header. */
+const PRELOADER_FLY_MS = 700;
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -74,6 +77,8 @@ export default function App() {
   const [booting, setBooting] = useState(true);
   const [bootProgress, setBootProgress] = useState(0);
   const [bootExiting, setBootExiting] = useState(false);
+  const preloaderLogoRef = useRef<HTMLDivElement>(null);
+  const headerLogoRef = useRef<HTMLDivElement>(null);
 
   // Jalankan progres 0 -> 100 lalu tutup layar pembuka
   useEffect(() => {
@@ -115,15 +120,61 @@ export default function App() {
     };
   }, []);
 
-  // Kunci gulir selama layar pembuka masih menutup halaman
+  // Kunci gulir selama layar pembuka masih menutup halaman.
+  // Posisi juga dikembalikan ke atas supaya logo tujuan tetap terlihat
+  // kalau halaman di-refresh dalam keadaan sudah tergulir.
   useEffect(() => {
     if (!booting) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     return () => {
       document.body.style.overflow = previous;
     };
   }, [booting]);
+
+  /**
+   * Emblem "tertarik" dari tengah layar ke logo di header.
+   * Posisi tujuan diukur saat runtime (FLIP), jadi tetap presisi di
+   * segala ukuran layar. Emblem di header disembunyikan selama ini
+   * dan baru muncul tepat saat animasi selesai, sehingga pergantiannya
+   * tidak terlihat.
+   */
+  useEffect(() => {
+    if (!bootExiting) return;
+
+    const from = preloaderLogoRef.current;
+    const to = headerLogoRef.current;
+    if (!from || !to) return;
+
+    const a = from.getBoundingClientRect();
+    const b = to.getBoundingClientRect();
+
+    // Rasio skala dari induk (panggung diperbesar 1.3x di layar lebar),
+    // supaya jarak tempuh tetap akurat secara visual.
+    const parentScale = from.offsetWidth ? a.width / from.offsetWidth : 1;
+    const dx = (b.left + b.width / 2 - (a.left + a.width / 2)) / parentScale;
+    const dy = (b.top + b.height / 2 - (a.top + a.height / 2)) / parentScale;
+    const scale = a.width ? b.width / a.width : 1;
+
+    if (typeof from.animate !== 'function') return;
+
+    const flight = from.animate(
+      [
+        { transform: 'translate(0px, 0px) scale(1)' },
+        { transform: `translate(${dx}px, ${dy}px) scale(${scale})` },
+      ],
+      {
+        duration: PRELOADER_FLY_MS,
+        // ease-in-out: mulai pelan, melaju, lalu mendarat halus —
+        // terasa seperti "ditarik" bukan melompat.
+        easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
+        fill: 'forwards',
+      }
+    );
+
+    return () => flight.cancel();
+  }, [bootExiting]);
 
   // Tombol "kembali ke atas" muncul setelah menggulir cukup jauh
   useEffect(() => {
@@ -232,6 +283,7 @@ export default function App() {
           aria-live="polite"
           aria-label="Memuat halaman JDIH Senat Mahasiswa"
         >
+          <div className="preloader__veil" aria-hidden="true" />
           <div className="preloader__glow preloader__glow--a" aria-hidden="true" />
           <div className="preloader__glow preloader__glow--b" aria-hidden="true" />
 
@@ -266,7 +318,7 @@ export default function App() {
             </div>
 
             {/* Emblem SEMA */}
-            <div className="preloader__logo">
+            <div className="preloader__logo" ref={preloaderLogoRef}>
               <div
                 className="preloader__logo-img"
                 style={{ backgroundImage: 'url(/assets/aistudio/Logo_Sema_HD_ef634b2e.png)' }}
@@ -311,19 +363,23 @@ export default function App() {
       </div>
 
       {/* Main Content Container - Mobile First (Max 580px width) */}
-      <div className={`relative z-10 max-w-xl mx-auto px-4 pt-8 md:pt-12 sm:px-6 ${booting ? 'opacity-0' : 'page-enter'}`}>
+      <div className="relative z-10 max-w-xl mx-auto px-4 pt-8 md:pt-12 sm:px-6 page-enter">
 
         {/* HEADER / PROFILE SECTION */}
         <header className="flex flex-col items-center text-center">
-          {/* Logo with Liquid Glass Aura Ring */}
-          <div className="relative group mb-5">
+          {/* Logo with Liquid Glass Aura Ring — seluruh grup disembunyikan
+              selama preloader, lalu muncul tepat saat emblem mendarat. */}
+          <div className={`relative group mb-5 ${booting ? 'invisible' : 'visible'}`}>
             {/* Rotating conic aura ring */}
             <div className="absolute -inset-3 rounded-full bg-[conic-gradient(from_0deg,#a855f7,#6366f1,#22d3ee,#a855f7)] opacity-50 blur-lg animate-aura-spin transition-opacity duration-500 group-hover:opacity-80" />
             {/* Soft ambient glow */}
             <div className="absolute -inset-7 rounded-full bg-purple-500/25 blur-2xl animate-pulse-glow" />
 
             {/* Glass Border & Frame */}
-            <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2.5 glass-surface border border-white/35 shadow-[0_22px_55px_-18px_rgba(139,92,246,0.75)] flex items-center justify-center overflow-hidden">
+            <div
+              ref={headerLogoRef}
+              className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2.5 glass-surface border border-white/35 shadow-[0_22px_55px_-18px_rgba(139,92,246,0.75)] flex items-center justify-center overflow-hidden"
+            >
               {/* Inner hairline ring */}
               <div className="pointer-events-none absolute inset-1.5 rounded-full border border-white/15" />
               {/* Circular HD Emblem Image from User Asset */}

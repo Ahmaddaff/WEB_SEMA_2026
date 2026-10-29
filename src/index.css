@@ -429,9 +429,17 @@ html {
   align-items: center;
   justify-content: center;
   gap: 2.1rem;
-  background: #080915;
+  background: transparent;
   overflow: hidden;
   will-change: opacity;
+}
+
+/* Tirai gelap terpisah dari isinya, supaya bisa memudar lebih dulu
+   sementara emblem masih dalam perjalanan ke header. */
+.preloader__veil {
+  position: absolute;
+  inset: 0;
+  background: #080915;
 }
 
 /* Cahaya ambient di dua sudut */
@@ -649,18 +657,36 @@ html {
   animation: preloaderRise 0.6s ease-out 0.75s both;
 }
 
-/* ---- Fase keluar: emblem membesar lalu halaman terkuak ---- */
+/* ---- Fase keluar: tirai memudar, emblem terbang ke logo header ----
+   Perjalanan emblem sendiri dianimasikan lewat Web Animations API
+   (lihat App.tsx) karena tujuannya diukur saat runtime. */
 .preloader.is-exiting {
   pointer-events: none;
-  animation: preloaderFadeOut 0.64s ease-out forwards;
 }
 
-.preloader.is-exiting .preloader__stage {
-  animation: preloaderStageOut 0.64s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+.preloader.is-exiting .preloader__veil {
+  /* Tirai ditahan sebentar supaya emblem sempat terlihat melesat,
+     baru halaman terkuak saat emblem mendekati header. */
+  animation: preloaderVeilOut 0.58s ease-in-out 0.12s forwards;
 }
 
 .preloader.is-exiting .preloader__meta {
-  animation: preloaderMetaOut 0.46s ease-out forwards;
+  animation: preloaderMetaOut 0.2s ease-out forwards;
+}
+
+.preloader.is-exiting .preloader__arc,
+.preloader.is-exiting .preloader__aura,
+.preloader.is-exiting .preloader__ping,
+.preloader.is-exiting .preloader__orbit,
+.preloader.is-exiting .preloader__glow,
+.preloader.is-exiting .preloader__stage::before {
+  animation: preloaderFadeFast 0.28s ease-out forwards;
+}
+
+/* Animasi mengambang dimatikan agar tidak berebut properti transform
+   dengan animasi terbang. */
+.preloader.is-exiting .preloader__logo {
+  animation: none;
 }
 
 @keyframes preloaderAura {
@@ -741,24 +767,17 @@ html {
   }
 }
 
-@keyframes preloaderFadeOut {
-  0%,
-  50% {
+@keyframes preloaderVeilOut {
+  0% {
     opacity: 1;
   }
   100% {
     opacity: 0;
-    visibility: hidden;
   }
 }
 
-@keyframes preloaderStageOut {
-  0% {
-    scale: 1;
-    opacity: 1;
-  }
-  100% {
-    scale: 1.4;
+@keyframes preloaderFadeFast {
+  to {
     opacity: 0;
   }
 }
@@ -795,6 +814,7 @@ html {
    ini jaring pengaman kalau masih sempat tampil sesaat. */
 @media (prefers-reduced-motion: reduce) {
   .preloader,
+  .preloader__veil,
   .preloader__aura,
   .preloader__orbit,
   .preloader__ping,

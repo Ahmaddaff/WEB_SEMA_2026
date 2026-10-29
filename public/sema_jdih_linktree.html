@@ -589,9 +589,23 @@
       align-items: center;
       justify-content: center;
       gap: 2.1rem;
-      background: #080915;
+      background: transparent;
       overflow: hidden;
       will-change: opacity;
+    }
+
+    /* Tirai gelap terpisah dari isinya, supaya bisa memudar lebih dulu
+       sementara emblem masih dalam perjalanan ke header. */
+    .preloader__veil {
+      position: absolute;
+      inset: 0;
+      background: #080915;
+    }
+
+    /* Selama layar pembuka aktif, logo di header disembunyikan.
+       Emblem yang terbang akan mendarat tepat di posisinya. */
+    body.is-booting .logo-container {
+      visibility: hidden;
     }
 
     .preloader__glow {
@@ -803,17 +817,31 @@
       animation: preloaderRise 0.6s ease-out 0.75s both;
     }
 
+    /* Fase keluar: tirai memudar, emblem terbang ke logo header.
+       Perjalanan emblem dianimasikan lewat Web Animations API di skrip. */
     .preloader.is-exiting {
       pointer-events: none;
-      animation: preloaderFadeOut 0.64s ease-out forwards;
     }
 
-    .preloader.is-exiting .preloader__stage {
-      animation: preloaderStageOut 0.64s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    .preloader.is-exiting .preloader__veil {
+      animation: preloaderVeilOut 0.58s ease-in-out 0.12s forwards;
     }
 
     .preloader.is-exiting .preloader__meta {
-      animation: preloaderMetaOut 0.46s ease-out forwards;
+      animation: preloaderMetaOut 0.2s ease-out forwards;
+    }
+
+    .preloader.is-exiting .preloader__arc,
+    .preloader.is-exiting .preloader__aura,
+    .preloader.is-exiting .preloader__ping,
+    .preloader.is-exiting .preloader__orbit,
+    .preloader.is-exiting .preloader__glow,
+    .preloader.is-exiting .preloader__stage::before {
+      animation: preloaderFadeFast 0.28s ease-out forwards;
+    }
+
+    .preloader.is-exiting .preloader__logo {
+      animation: none;
     }
 
     @keyframes preloaderAura {
@@ -855,14 +883,13 @@
       to { transform: translateX(210%); }
     }
 
-    @keyframes preloaderFadeOut {
-      0%, 50% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
+    @keyframes preloaderVeilOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
     }
 
-    @keyframes preloaderStageOut {
-      0% { scale: 1; opacity: 1; }
-      100% { scale: 1.4; opacity: 0; }
+    @keyframes preloaderFadeFast {
+      to { opacity: 0; }
     }
 
     @keyframes preloaderMetaOut {
@@ -894,6 +921,7 @@
       }
 
       .preloader,
+      .preloader__veil,
       .preloader__aura,
       .preloader__orbit,
       .preloader__ping,
@@ -998,6 +1026,7 @@
 
   <!-- ============ LAYAR PEMBUKA ============ -->
   <div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Memuat halaman JDIH Senat Mahasiswa">
+    <div class="preloader__veil" aria-hidden="true"></div>
     <div class="preloader__glow preloader__glow--a" aria-hidden="true"></div>
     <div class="preloader__glow preloader__glow--b" aria-hidden="true"></div>
 
@@ -1727,7 +1756,8 @@
 
       var ARC = 2 * Math.PI * 78;
       var DURATION = 1600;
-      var EXIT_MS = 640;
+      var FLY_MS = 700;
+      var EXIT_MS = 760;
 
       // Hormati preferensi minim gerakan: lewati saja
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -1736,6 +1766,8 @@
       }
 
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('is-booting');
+      window.scrollTo(0, 0);
 
       var start = performance.now();
 
@@ -1743,6 +1775,34 @@
         if (arc) arc.setAttribute('stroke-dashoffset', String(ARC - (ARC * value) / 100));
         if (bar) bar.style.width = value + '%';
         if (pct) pct.textContent = Math.round(value) + '%';
+      };
+
+      // Emblem "tertarik" ke posisi logo di header (FLIP: ukur saat runtime)
+      var flyToHeader = function () {
+        var from = preloader.querySelector('.preloader__logo');
+        var to = document.querySelector('.logo-wrapper');
+        if (!from || !to || typeof from.animate !== 'function') return;
+
+        var a = from.getBoundingClientRect();
+        var b = to.getBoundingClientRect();
+
+        // Kompensasi skala induk (panggung diperbesar 1.3x di layar lebar)
+        var parentScale = from.offsetWidth ? a.width / from.offsetWidth : 1;
+        var dx = (b.left + b.width / 2 - (a.left + a.width / 2)) / parentScale;
+        var dy = (b.top + b.height / 2 - (a.top + a.height / 2)) / parentScale;
+        var scale = a.width ? b.width / a.width : 1;
+
+        from.animate(
+          [
+            { transform: 'translate(0px, 0px) scale(1)' },
+            { transform: 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scale + ')' }
+          ],
+          {
+            duration: FLY_MS,
+            easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
+            fill: 'forwards'
+          }
+        );
       };
 
       var tick = function (now) {
@@ -1756,8 +1816,11 @@
 
         setTimeout(function () {
           preloader.classList.add('is-exiting');
+          flyToHeader();
+
           setTimeout(function () {
             document.body.style.overflow = '';
+            document.body.classList.remove('is-booting');
             if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
           }, EXIT_MS);
         }, 170);
